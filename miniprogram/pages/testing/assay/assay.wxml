@@ -1,0 +1,1195 @@
+<body>
+  <!--ENGLISH-->
+  <view wx:if="{{lang=='EN'}}" class ="subbody" style = "overscroll-behavior-x: none;">
+    <view class="greybg">
+    <view wx:if="{{class.NoPreview == false}}">
+        <view class = "title">PROTOCOL PREVIEW</view>
+    </view> 
+
+    <view  class = "fixedButtonContainer" bindtap="reset_timers">
+      <text class = "fixedButton"> reset all timers </text>
+    </view>
+
+    <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+      <text class = "imageTitle">Preparations</text>
+    </view>
+    <view  wx:if="{{tissueCut}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> A cutting board and a knife.</text>
+        </view>
+      </view>
+    </view>
+    <view  wx:if="{{mixBuffer && submatrix !='milk'}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> A small tube filled with liquid (included in the test kit).</text>
+        </view>
+      </view>
+      <view wx:if="{{matrix!='dairy and eggs'}}" class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> Your {{submatrix}} (in the same size or volume as a soy bean). </text>
+        </view>
+      </view>
+      <view wx:if="{{submatrix =='fresh eggs'}}" class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text>Mix the yolk and the egg white together.</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{submatrix =='milk'}}" class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text>Collect one tablespoon of milk in a cup to test.</text>
+        </view>
+      </view>
+    <view  wx:if="{{vialToVial}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> A small empty well without lid (included in the test kit).</text>
+        </view>
+      </view>
+    </view>
+    <view  wx:if="{{addToStrip}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> The test strip and a small pipette (included in the test kit).
+          </text>
+        </view>
+      </view>
+    </view>
+    <view  wx:if="{{pestControl}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text>Pre-fold two test strips (included in the test kit) over the dashed lines; then remove the plastic layer. 
+          </text>
+        </view>
+      </view>
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> Test solution flask (included in the test kit).
+          </text>
+        </view>
+      </view>
+    </view>
+    <view  class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> Do you need to leave this app while running a test? Then press the button in the top right corner. </text>
+        </view>
+      </view>
+    </view>
+    </view>
+
+
+    <view class="whitebg">
+    <view wx:if="{{tissueCut}}">
+      <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Slicing and dicing</text>
+      </view>
+      <canvas  canvas-id="tissueCut" class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text> Slice and dice your {{submatrix}} as fine as you can.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view  wx:if="{{mixBuffer && submatrix !='milk'}}" >
+      <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Mixing step</text>
+      </view>
+      <canvas canvas-id="mixBuffer" id = "mixBuffer" class = "canvas_protocol" bindlongtap = 'startMBTimer' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "startMBTimer"  id="pressMBButton">
+        <text class = "customButton">Start timer</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Add the {{submatrix}} into the tube. Do not exceed 1.5 ml.</text>
+          </view>
+        </view> 
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Close the tube and shake for {{class.mixBuffer / 60}} minutes.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:if="{{letStand_1 && submatrix !='milk'}}" >
+      <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Resting step</text>
+      </view>
+      <canvas canvas-id="letStand_1" id = "letStand_1" class = "canvas_protocol" bindlongtap = 'startLSTimer_1' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "startLSTimer_1"  id="pressLSButton_1">
+        <text class = "customButton">Start timer</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Let the tube stand for {{class.letStand_1 / 60}} minutes.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+
+
+    <view wx:if="{{vialToVial && submatrix != 'milk'}}" >
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Put into a new well</text>
+      </view>
+      <canvas canvas-id="vialToVial"  class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Transfer 4 drops of your {{submatrix}} mixture from the previous step into the empty well.</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Gently mix the solution with your pipette.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view wx:if="{{letStand_2}}" >
+      <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;"  class = "textContainer">
+        <text class = "imageTitle">Color step</text>
+      </view>
+      <canvas canvas-id="letStand_2" id = "letStand_2" class = "canvas_protocol" bindlongtap = 'startLSTimer_2' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "startLSTimer_2"  id="pressLSButton_2">
+        <text class = "customButton">Start timer</text>
+      </view>
+      <view class = "textContainer">  
+        <view  wx:if="{{submatrix =='milk'}}" class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Transfer 4 drops of your {{submatrix}} into the empty well without lid.</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>After mixing with your pipette, the solution should turn slightly red. </text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Let the well stand for {{class.letStand_2 / 60}} minutes.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view wx:if="{{letStand_2==0 && practice==1 && submatrix !='milk'}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Practice before the final step!</text>
+      </view>
+      <canvas canvas-id="practice"  class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Take up some fluid and drop 3 droplets back into the tube.</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>If the fluid is to thick to take up, add a few drops of pure water.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view  wx:if="{{addToStrip}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Add mixture to the strip</text>
+      </view>
+      <canvas canvas-id="addToStrip" id = "addToStrip" class = "canvas_protocol" bindlongtap = 'startASTimer' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "startASTimer"  id="pressASButton">
+        <text class = "customButton">Start timer</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text wx:if="{{vialToVial == false}}">Add 3 droplets to the small bottom hole of the test strip. </text>
+            <text wx:if="{{vialToVial}}">Add all the liquid from the well to the small bottom hole of the test strip. </text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Let it stand for {{class.addToStrip / 60}} minutes.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+      
+    <view  wx:if="{{pestControl}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Add only fluid</text>
+      </view>
+      <canvas canvas-id="pestControl"  class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>As indicated on the drawing, cut off the corner of a test card</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Add 3 droplets from the flask onto the white patch of that card.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view  wx:if="{{pestSample}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Add fluid with {{submatrix}}</text>
+      </view>
+      <canvas canvas-id="pestSample"  class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Add 3 droplets from the same flask to a clean part of your {{submatrix}}. Rub it in with another piece of {{submatrix}} </text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Add the liquid from your {{submatrix}} to the white patch on the bottom left. The amount of liquid on both patches should be similar. Repeat the previous step if necessary</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    
+    <view  wx:if="{{incubatePest}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Waiting step</text>
+      </view>
+      <canvas canvas-id="incubatePest" id = "incubatePest" class = "canvas_protocol"  bindlongtap = 'pressIncubatePestTimer'  ></canvas>
+      <view class = "customButtonContainer"  bindtap = "pressIncubatePestTimer"  id="pressIncubatePestButton">
+        <text class = "customButton">Start timer</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Let the patch stand for {{class.incubatePest / 60}} minutes.</text>
+          </view>
+        </view>
+      </view>
+    </view> 
+
+    <view  wx:if="{{foldPest}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Fold the patches</text>
+      </view>
+      <canvas canvas-id="foldPest" class = "canvas_protocol"  ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Fold the patch double as indicated.</text>
+          </view>
+        </view>
+      </view>
+    </view>
+      
+
+    <view  wx:if="{{pressPest}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">Press Pest</text>
+      </view>
+      <canvas canvas-id="pressPest" id = "pressPest" class = "canvas_protocol" bindlongtap = 'pressPestTimer' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "pressPestTimer"  id="pressPestButton">
+        <text class = "customButton">Start timer</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Press the patches between your thumbs and index fingers for {{class.pressPest / 60}} minutes</text>
+          </view>
+        </view>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>You can also use paperclips 📎 </text>
+          </view>
+        </view>
+      </view>
+    </view> 
+
+
+    <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+      <text  class = "imageTitle">Analyze your data</text>
+    </view>
+  
+
+    <view  wx:if="{{readStrip}}">
+      <view wx:if="{{class.examplePicture}}">
+        <view class = "examplePicture">
+          <image src="{{class.examplePicture}}" style="border-radius: 15rpx;"></image>
+        </view>
+        <view class = "examplePictureText">
+          <text>{{class.examplePictureText}}</text>
+        </view>
+      </view>
+
+
+      <canvas canvas-id="readStrip" id = "readStrip" class = "canvas_protocol"  ></canvas>
+      <slider bindchanging="drawreadStrip" value="50" min="0" max = "100" show-value/>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text wx:if="{{class.combo==1}}">Slide the slider to find the band pattern that most resembles your own test strip.</text>
+            <text wx:if="{{class.combo > 1}}">Slide the slider to compare the band patterns on each of the {{class.combo}} strips.  N: Negative, P: Positive, U: Undecided</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text  wx:if="{{class.combo==1}}">Your result is indicted under the image. N: Negative, P: Positive, U: Undecided</text>
+            <text wx:if="{{class.combo > 1}}">Please leave the slider in the following position: 
+              "P" if at least one strip indicates "P"; 
+              "U" if at least one strip indicates "U"; 
+              "N" in all other cases. </text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view  wx:if="{{readPest}}">
+      <canvas canvas-id="readPest" id = "readPest" class = "canvas_protocol"  ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <text class = "slidecell_short">Just fluid</text>
+          <slider class = "slidecell_long"bindchanging="ControlReadPest" value="100" min="0" max = "100" show-value/>
+        </view>
+        <view class="date-slider">
+          <text class = "slidecell_short">{{submatrix}}</text>
+          <slider class = "slidecell_long" bindchanging="SampleReadPest" value="100" min="0" max = "100" show-value/>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>Slide the top slider to find the color intensity that most resembles the top right patch.</text>
+          </view>
+        </view> 
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text> Slide the bottom slider to find the color intensity that most resembles the bottom left patch. </text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <text class="text_notify"> {{subcategory}} in {{submatrix}}: {{qualitative}} </text>
+
+    <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+      <text  class = "imageTitle">Store your results</text>
+    </view>
+
+
+    <view wx:if="{{class.NoPreview}}" class = "customButtonContainer" bindtap="takePicture" >
+      <text class = "customButton"> Take a picture </text>
+    </view>
+
+    <view wx:if="{{picturelink}}">
+      <view  style= "background-color:LightSkyBlue;color:white" class = "textContainer">
+        <text class = "imageTitle"> Your picture </text>
+      </view>
+      <image class="image_full" mode="aspectFit" src="{{picturelink}}"></image>
+    </view>
+
+
+    <view wx:if="{{class.NoPreview}}" class = "customButtonContainer" bindtap="uploadData">
+      <text class = "customButton"> Ready to upload! </text>
+    </view>
+
+    
+    <view wx:if="{{picturelink==false}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon">
+          </view>
+        </view>
+        <view class = "textcell_long">  
+          <text>Please take a clear picture of your result in the same orientation as the images above.</text>
+        </view>
+      </view>
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon">
+          </view>
+        </view>
+        <view class = "textcell_long">  
+          <text>Then, upload your picture and your result.</text>
+        </view>
+      </view>
+    </view>
+    </view>
+
+    <view class="greybg">
+    <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+      <text  class = "imageTitle">What does "{{qualitative}}" mean?</text>
+    </view>
+    <view class = "result_row">
+      <view wx:if="{{qualitative =='P'}}" class = "result_blocks" style="background-color:DarkRed; font-size: 35rpx;">
+        Positive
+      </view>
+      <view wx:if="{{qualitative =='N'}}" class = "result_blocks" style="background-color:deepskyblue; font-size: 35rpx;">
+        Negative
+      </view>
+      <view wx:if="{{qualitative =='U'}}" class = "result_blocks" style="background-color:DarkOrange; font-size: 35rpx;">
+      Undecided
+      </view>
+    </view>
+    <view class = "result_row">
+      <view wx:if="{{qualitative =='P'}}" class = "result_blocks" style="background-color:DarkRed;">
+        You tested {{subcategory}} in {{submatrix}} and the result is Positive. 
+        Reason to panic? No. Reason to keep testing? Absolutely! You may want to know if this is a rule or an exception.   
+      </view>
+      <view  wx:if="{{qualitative =='N'}}" class = "result_blocks" style="background-color:deepskyblue;">
+        Testing {{subcategory}} in {{submatrix}} lead to a negative result. The chance for contamination in {{submatrix}} is very small. Great news!
+      </view>
+      <view wx:if="{{qualitative =='U'}}" class = "result_blocks" style="background-color:DarkOrange;">
+        Your test did not produce a reliable result. Don't worry, this occurs occasionally. Repeat your test, or contact us for support.
+      </view>
+    </view>
+
+    <view wx:if="{{class.NoPreview == false}}" class = "customButtonContainer" bindtap="goBack">
+      <text class = "customButton"> Return </text>
+    </view>
+  </view>
+  </view>
+
+
+
+  <!--CHINESE-->
+  <view wx:if="{{lang=='CN'}}" class ="subbody" style = "overscroll-behavior-x: none;">
+    <view class="greybg">
+    <view wx:if="{{class.NoPreview == false}}">
+        <view class = "title">检测流程预览</view>
+    </view> 
+
+    <view  class = "fixedButtonContainer" bindtap="reset_timers">
+      <text class = "fixedButton"> 重置计时 </text>
+    </view>
+
+    <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+      <text class = "imageTitle">准备</text>
+    </view>
+    <view  wx:if="{{tissueCut}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> 切菜板和刀</text>
+        </view>
+      </view>
+    </view>
+    <view  wx:if="{{mixBuffer && submatrix !='奶'}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> 含有检测液的试管 (检测盒中提供)</text>
+        </view>
+      </view>
+      <view wx:if="{{matrix !='蛋奶'}}" class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> 待测{{submatrix}} (黄豆粒大小)</text>
+        </view>
+      </view>
+      <view wx:if="{{submatrix =='鲜蛋'}}" class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text>打匀的蛋</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{submatrix =='奶'}}" class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text>在杯中倒入少许{{submatrix}}以供检测</text>
+        </view>
+      </view>
+    <view  wx:if="{{vialToVial}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> 检测卡包装中的金标微孔 (检测盒中提供)</text>
+        </view>
+      </view>
+    </view>
+    <view  wx:if="{{addToStrip}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> 检测卡和小吸管 (检测盒中提供)
+          </text>
+        </view>
+      </view>
+    </view>
+    <view  wx:if="{{pestControl}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text>按虚线折叠检测卡(检测盒中提供)并除去保护膜
+          </text>
+        </view>
+      </view>
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> 一小瓶检测液 (检测盒中提供)
+          </text>
+        </view>
+      </view>
+    </view>
+    <view  class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> 检测中如需离开小程序，请按右上角的按钮 </text>
+        </view>
+      </view>
+    </view>
+    </view>
+
+
+    <view class="whitebg">
+    <view wx:if="{{tissueCut}}">
+      <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">切碎样本</text>
+      </view>
+      <canvas  canvas-id="tissueCut" class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text> 将待测{{submatrix}}尽可能地切碎</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+
+    <view  wx:if="{{mixBuffer && submatrix !='奶'}}" >
+      <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">混合</text>
+      </view>
+      <canvas canvas-id="mixBuffer" id = "mixBuffer" class = "canvas_protocol" bindlongtap = 'startMBTimer' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "startMBTimer"  id="pressMBButton">
+        <text class = "customButton">开始计时</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text wx:if="{{tissueCut}}">将切碎的{{submatrix}}加入试管. 不要超过1.5毫升</text>
+            <text wx:if="{{tissueCut==0}}">将待测{{submatrix}}加入试管. 不要超过1.5毫升</text>
+          </view>
+        </view> 
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>盖住试管，摇晃{{class.mixBuffer / 60}} 分钟</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:if="{{letStand_1 && submatrix !='奶'}}" >
+      <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">静置</text>
+      </view>
+      <canvas canvas-id="letStand_1" id = "letStand_1" class = "canvas_protocol" bindlongtap = 'startLSTimer_1' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "startLSTimer_1"  id="pressLSButton_1">
+        <text class = "customButton">开始计时</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>将试管静置{{class.letStand_1 / 60}}分钟</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+
+
+    <view wx:if="{{vialToVial && submatrix != '奶'}}" >
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">转移至新金标微孔中</text>
+      </view>
+      <canvas canvas-id="vialToVial"  class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>从试管中吸出一些液体</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>滴4滴{{submatrix}}到金标微孔中，并混合均匀</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view wx:if="{{letStand_2}}" >
+      <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;"  class = "textContainer">
+        <text class = "imageTitle">加样静置</text>
+      </view>
+      <canvas canvas-id="letStand_2" id = "letStand_2" class = "canvas_protocol" bindlongtap = 'startLSTimer_2' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "startLSTimer_2"  id="pressLSButton_2">
+        <text class = "customButton">开始计时</text>
+      </view>
+      <view class = "textContainer">  
+        <view wx:if="{{submatrix =='奶'}}" class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>用吸管吸取4滴{{submatrix}}，加入金标微孔中混合均匀</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>混合之后的溶液应该呈红色</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>静置{{class.letStand_2 / 60}}分钟</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view wx:if="{{letStand_2==0 && practice ==1 && submatrix !='奶'}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">在最后一步前先练习一下吧！</text>
+      </view>
+      <canvas canvas-id="practice"  class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>试着从上一步中吸取较为澄清的液体</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>如果液体过于浓稠，加入几滴纯净水</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view  wx:if="{{addToStrip}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">将待测液体加到检测卡上</text>
+      </view>
+      <canvas canvas-id="addToStrip" id = "addToStrip" class = "canvas_protocol" bindlongtap = 'startASTimer' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "startASTimer"  id="pressASButton">
+        <text class = "customButton">开始计时</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text wx:if="{{vialToVial == false}}">加3滴待测液体到检测卡上的小洞里 </text>
+            <text wx:if="{{vialToVial}}">将金标微孔中的液体全部滴入检测卡上的小洞里 </text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text> 静置{{class.addToStrip / 60}}分钟</text>
+          </view>
+        </view>
+      </view>
+    </view>
+      
+    <view  wx:if="{{pestControl}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">只加检测液</text>
+      </view>
+      <canvas canvas-id="pestControl"  class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>如图所示，将一张检测卡上的一角剪掉</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>加3滴检测液到该检测卡上的白色药片上</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view  wx:if="{{pestSample}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">加检测液到{{submatrix}}</text>
+      </view>
+      <canvas canvas-id="pestSample"  class = "canvas_protocol" ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>滴3滴检测液在{{submatrix}}干净的表面。 用另一片{{submatrix}}在滴液处轻轻摩擦 </text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text> 如图所示，将{{submatrix}}上的液滴滴在另一个检测卡上的白色药片上。如果液体太少请重复上一步</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    
+    <view  wx:if="{{incubatePest}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">等待</text>
+      </view>
+      <canvas canvas-id="incubatePest" id = "incubatePest" class = "canvas_protocol"  bindlongtap = 'pressIncubatePestTimer'  ></canvas>
+      <view class = "customButtonContainer"  bindtap = "pressIncubatePestTimer"  id="pressIncubatePestButton">
+        <text class = "customButton">开始计时</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>静置{{class.incubatePest / 60}}分钟</text>
+          </view>
+        </view>
+      </view>
+    </view> 
+
+    <view  wx:if="{{foldPest}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">折叠检测卡</text>
+      </view>
+      <canvas canvas-id="foldPest" class = "canvas_protocol"  ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>按如图所示折叠检测卡</text>
+          </view>
+        </view>
+      </view>
+    </view>
+      
+
+    <view  wx:if="{{pressPest}}">
+      <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+        <text class = "imageTitle">按压检测卡</text>
+      </view>
+      <canvas canvas-id="pressPest" id = "pressPest" class = "canvas_protocol" bindlongtap = 'pressPestTimer' ></canvas>
+      <view class = "customButtonContainer"  bindtap = "pressPestTimer"  id="pressPestButton">
+        <text class = "customButton">开始计时</text>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>用手轻捏{{class.pressPest / 60}}分钟</text>
+          </view>
+        </view>
+      </view>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>也可以使用曲别针📎 </text>
+          </view>
+        </view>
+      </view>
+    </view> 
+
+
+    <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+      <text  class = "imageTitle">查看结果</text>
+    </view>
+
+
+    <view  wx:if="{{readStrip}}">
+      <view wx:if="{{class.examplePicture}}">
+        <view class = "examplePicture">
+          <image src="{{class.examplePicture}}" style="border-radius: 15rpx;"></image>
+        </view>
+        <view class = "examplePictureText">
+          <text>{{class.examplePictureText_cn}}</text>
+        </view>
+      </view>
+
+
+      <canvas canvas-id="readStrip" id = "readStrip" class = "canvas_protocol"  ></canvas>
+      <slider bindchanging="drawreadStrip" value="50" min="0" max = "100" show-value/>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text wx:if="{{class.combo==1}}">滑动以找到符合你检测结果的图例</text>
+            <text wx:if="{{class.combo > 1}}">划动以比较 {{class.combo}} 检测卡上的条带样式</text>
+          </view>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text  wx:if="{{class.combo==1}}">结果显示在图例下方</text>
+            <text wx:if="{{class.combo > 1}}">请将滑块按照以下描述保持在相应的位置：
+            “检出”：当至少有一个结果显示为“检出”时；
+            “未检出”：当所有结果都显示为“未检出”时；
+            “无法确定”：当至少有一个结果显示为“无法确定”时 </text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view  wx:if="{{readPest}}">
+      <canvas canvas-id="readPest" id = "readPest" class = "canvas_protocol"  ></canvas>
+      <view class = "textContainer">  
+        <view class="date-slider">
+          <text class = "slidecell_short">检测液对照</text>
+          <slider class = "slidecell_long"bindchanging="ControlReadPest" value="100" min="0" max = "100" show-value/>
+        </view>
+        <view class="date-slider">
+          <text class = "slidecell_short">{{submatrix}}</text>
+          <slider class = "slidecell_long" bindchanging="SampleReadPest" value="100" min="0" max = "100" show-value/>
+        </view>
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text>滑动第一个滑条以找到符合检测液对照卡上显示结果的图例</text>
+          </view>
+        </view> 
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon">
+            </view>
+          </view>
+          <view class = "textcell_long">  
+            <text> 滑动第二个滑条以找到符合蔬果检测卡上显示结果的图例</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <text class="text_notify"> {{submatrix}}中的{{subcategory_cn}}：{{qualitative}} </text>
+
+    <view  style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+      <text  class = "imageTitle">保存你的结果</text>
+    </view>
+
+
+    <view wx:if="{{class.NoPreview}}" class = "customButtonContainer" bindtap="takePicture" >
+      <text class = "customButton"> 拍照 </text>
+    </view>
+
+    <view wx:if="{{picturelink}}">
+      <view  style= "background-color:LightSkyBlue;color:white" class = "textContainer">
+        <text class = "imageTitle"> 你的图片 </text>
+      </view>
+      <image class="image_full" mode="aspectFit" src="{{picturelink}}"></image>
+    </view>
+
+
+    <view wx:if="{{class.NoPreview}}" class = "customButtonContainer" bindtap="uploadData">
+      <text class = "customButton"> 上传结果 </text>
+    </view>
+
+    
+    <view wx:if="{{picturelink==false}}" class = "textContainer">  
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon">
+          </view>
+        </view>
+        <view class = "textcell_long">  
+          <text>请按照图例所示的方向拍摄你的结果</text>
+        </view>
+      </view>
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon">
+          </view>
+        </view>
+        <view class = "textcell_long">  
+          <text>然后上传你的结果图</text>
+        </view>
+      </view>
+    </view>
+    </view>
+
+    <view class="greybg">
+    <view style= "background-color:LightSkyBlue;color:white;margin-top:25rpx;" class = "textContainer">
+      <text  class = "imageTitle">"{{qualitative}}"意味着什么？</text>
+    </view>
+    <view class = "result_row">
+      <view wx:if="{{qualitative =='检出'}}" class = "result_blocks" style="background-color:DarkRed; font-size: 35rpx;">
+        有检出
+      </view>
+      <view wx:if="{{qualitative =='未检出'}}" class = "result_blocks" style="background-color:deepskyblue; font-size: 35rpx;">
+        未检出
+      </view>
+      <view wx:if="{{qualitative =='无法确定'}}" class = "result_blocks" style="background-color:DarkOrange; font-size: 35rpx;">
+      无法确定
+      </view>
+    </view>
+    <view class = "result_row">
+      <view wx:if="{{qualitative =='检出'}}" class = "result_blocks" style="background-color:DarkRed;">
+        你在{{matrix}}中检测了{{subcategory_cn}}并发现了残留。无需惊慌，你可以通过保持规律的检测来了解该食品的长期质量状况   
+      </view>
+      <view  wx:if="{{qualitative =='未检出'}}" class = "result_blocks" style="background-color:deepskyblue;">
+        你检测了{{subcategory_cn}}且并未发现残留！恭喜你！
+      </view>
+      <view wx:if="{{qualitative =='无法确定'}}" class = "result_blocks" style="background-color:DarkOrange;">
+        你的检测无法给出明确的结果。这种情况偶尔会发生，请联系我们以获得帮助
+      </view>
+    </view>
+
+    <view wx:if="{{class.NoPreview == false}}" class = "customButtonContainer" bindtap="goBack">
+      <text class = "customButton"> 返回 </text>
+    </view>
+  </view>
+  </view>
+</body> 

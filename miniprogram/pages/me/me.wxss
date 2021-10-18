@@ -1,0 +1,88 @@
+.orderNumber{
+  margin: 5rpx  25rpx  5rpx  25rpx ;
+
+}
+
+.placedOrders{
+  font-size: 30rpx;
+}
+
+.orderDetailBox{
+  margin: 1% 5% 0% 5%; 
+  border:1rpx solid grey;
+  width:90%;
+  border-radius:15rpx;
+}
+
+.itemViewBoxContainer{
+  margin:5rpx;
+  display:flex;
+}
+
+.itemViewBox{
+  flex:2;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin:5rpx;
+}
+
+.descriptionBoxes{
+  flex:3;
+} 
+
+.descriptionBox{
+  height:100rpx;
+  display:flex;
+} 
+
+.remainDone{
+  flex:1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width:150rpx;
+} 
+
+.orderDetailExtra{
+  display: flex;
+  margin: 5%; 
+  width:85%;
+}
+
+.orderDetailItem{
+  flex: 1;
+} 
+
+.orderDetail{
+  flex: 1;
+  text-align: left;
+  justify-content: center;
+}
+
+.arrowbox{ 
+  margin-top: 15rpx;
+  float: left;
+  margin-left: 150rpx;
+}
+
+.title_expansion{
+  display: flex;
+  height: 40rpx;
+  background: transparent;
+  justify-content: left;
+  margin-left: 5%;     
+  align-items: center;
+  vertical-align: middle;
+  font-size:35rpx;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 15rpx;
+}
+
+.button_wide_content_me{
+  flex:1;
+  font-size:35rpx;
+  height:90rpx;
+}

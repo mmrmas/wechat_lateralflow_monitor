@@ -1,0 +1,69 @@
+<body>
+
+  <view class ="subbody">
+    <view class="greybg">
+      <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}">
+        <view class = "title">Scan the QR code to start testing</view>
+      </view>
+
+      <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}">
+        <view class = "title">扫码以开始检测</view>
+      </view>
+
+      <camera class="scanQR" device-position="back" flash="off" binderror="error" mode="scanCode" bindscancode="takeQR"></camera>
+
+      <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}">
+        <view class = "customButtonContainer">
+          <view class = "customButton" bindtap="takeQR">scan QR</view>
+        </view>
+      </view>
+
+      <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}">
+        <view class = "customButtonContainer">
+          <view class = "customButton" bindtap="takeQR">扫描二维码</view>
+        </view>
+      </view>
+    </view>
+
+     <!--ENGLISH-->
+     <view wx:if="{{lang=='EN'}}">
+      <view class ="whitebg">
+
+        <view class = "inputBox" style="text-align:center;">
+          <text>or enter purchase ID</text>
+          <input type = "text" confirm-type="go" bindconfirm = "enterPurchaseId"  placeholder = "copy from 'me' page"/>
+        </view>
+
+        <view class ="exampleBlock">
+          <image class = "exampleQR" src="cloud://anthill-test-a8ula.616e-anthill-test-a8ula-1302839884/appImages/QR_Ant_transparent.png"></image>
+          <view class = "exampleQRtext">
+            Scan the QR code with our logo on your product to start testing
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!--CHINESE-->
+    <view wx:if="{{lang=='CN'}}">
+      <view class ="whitebg">
+
+        <view class = "inputBox" style="text-align:center;">
+          <text>或者输入订单号</text>
+          <input type = "text" confirm-type="go" bindconfirm = "enterPurchaseId"  placeholder = "可以从我的订单中复制"/>
+        </view>
+
+
+        <view class ="exampleBlock">
+          <image class = "exampleQR" src="cloud://anthill-test-a8ula.616e-anthill-test-a8ula-1302839884/appImages/QR_Ant_transparent.png"></image>
+          <view class = "exampleQRtext">
+            扫描含有蚁巢Logo的二维码来开始你的检测
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</body> 

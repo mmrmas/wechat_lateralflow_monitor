@@ -1,0 +1,333 @@
+<body>
+<view class ="subbody">
+  <!--ENGLISH-->
+  <view wx:if="{{lang=='EN'}}"> 
+    <view style="height:468rpx;">
+      <swiper autoplay="true" circular="true" interval="5000" duration="1000" style="height:468rpx;">
+        <block wx:for="{{swipers_en}}" wx:key="*this">
+          <swiper-item>
+            <image class="slide-image" src="{{item.fileName_en}}"  style="height:468rpx;" mode= "scaleToFill" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>  
+  </view>
+
+  <!--CHINESE-->
+  <view wx:if="{{lang=='CN'}}" class ="subbody">
+    <view style="height:468rpx;">
+      <swiper autoplay="true" circular="true" interval="5000" duration="1000" style="height:468rpx;">
+        <block wx:for="{{swipers}}" wx:key="*this">
+          <swiper-item>
+            <image class="slide-image" src="{{item.fileName}}"  style="height:468rpx;" mode= "scaleToFill" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>  
+  </view>
+  
+
+  <view class = "greybg">
+    <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}" class="productList">
+        <view class = "checkbox_container_head">
+          <view class = "checkbox_box_head"></view>
+          <view class = "checkbox_box_description_head">Description</view>
+          <view class = "checkbox_box">Price</view>
+          <view class = "checkbox_box_head" style = "flex:2">Quantity</view>
+          <view class = "checkbox_box_head">RMB</view>
+        </view>
+      </view>
+      <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}" class="productList">
+        <view class = "checkbox_container_head">
+          <view class = "checkbox_box_head"></view>
+          <view class = "checkbox_box_description_head">产品</view>
+          <view class = "checkbox_box">价格</view>
+          <view class = "checkbox_box_head" style = "flex:2">数量</view>
+          <view class = "checkbox_box_head">元</view>
+        </view>
+      </view>
+
+      <view class="productList">
+        <checkbox-group bindchange="checkboxChange">
+        <view wx:for="{{items}}" wx:key="productName" wx:if="{{item.hidden == false && item.hidden_search == false  && (!item.bundleItem || item.bundleItem == false) }}" > 
+          <view class = "checkbox_container">
+            <view class = "checkbox_box">
+              <label class="checkbox" > 
+                <checkbox value  = "{{item._id}}" checked = "{{item.checked}}"></checkbox>
+              </label> 
+            </view> 
+            <view class = "checkbox_box_description" ontap="toTestDescriptionDetail" id = "{{item._id}}">
+              <!--ENGLISH-->
+              <view wx:if="{{lang=='EN'}}" > {{item.description}}</view>
+              <!--CHINESE-->
+              <view wx:if="{{lang=='CN'}}" > {{item.description_cn}}</view>
+
+              <view class ="arrowbox">
+                <view wx:if="{{expanded!=item._id}}"class = "downArrow" ></view>  
+              </view>  
+            </view>
+            <view class = "checkbox_box">
+              <view> {{item.productCost}} </view>
+            </view>
+              <picker style="flex:2" id = "{{item.productName}}" bindchange="bindPickerChange" mode="selector" value="{{item.quantity}} " range="{{array}}">
+                <view class = "checkbox_box_picker">{{item.quantity}}
+                </view>
+              </picker> 
+            <view class = "checkbox_box">
+              <view> {{item.price}}</view>
+            </view>
+          </view>
+          <view wx:if="{{expanded==item._id}}" >
+          <view class="popup_bg"></view>
+            <!--ENGLISH-->
+            <view wx:if="{{lang=='EN'}}" class = "popup">
+              <view wx:for="{{item.what}}" wx:key="*this" > 
+                <view class="date-slider">
+                  <view class = "textcell_short">  
+                    <view class="list_icon"></view>
+                  </view>
+                  <view class = "textcell_long">  
+                    <text>{{item}}</text>
+                  </view>
+                </view> 
+              </view>
+              <view class="date-slider">
+                <view class = "textcell_short">  
+                  <view class="list_icon"></view>
+                </view>
+                <view class = "textcell_long">  
+                  <text>This assay is completed in {{item.testDuration}} with {{item.steps}} manual steps</text>
+                </view>
+              </view>
+              <view class = "customButtonContainer">
+                <view class = "customButton" ontap="closePopup"> Close</view>
+                <view class = "customButton" id="{{item._id}}" ontap="toTestDescription"> Read more</view>
+              </view>
+            </view>
+
+             <!--CHINESE-->
+             <view wx:if="{{lang=='CN'}}" class = "popup">
+              <view wx:for="{{item.what_cn}}" wx:key="*this" > 
+                <view class="date-slider">
+                  <view class = "textcell_short">  
+                    <view class="list_icon"></view>
+                  </view>
+                  <view class = "textcell_long">  
+                    <text>{{item}}</text>
+                  </view>
+                </view> 
+              </view>
+              <view class="date-slider">
+                <view class = "textcell_short">  
+                  <view class="list_icon"></view>
+                </view>
+                <view class = "textcell_long">  
+                  <text>本检测在 {{item.steps}} 个步骤内完成，耗时大约 {{item.testDuration_cn}}</text>
+                </view>
+              </view>
+              <view class = "customButtonContainer">
+                <view class = "customButton" ontap="closePopup">关闭</view>
+                <view class = "customButton" id="{{item._id}}" ontap="toTestDescription">了解更多</view>
+              </view>
+            </view>
+ 
+          </view>
+          <view style="width:100%"></view>
+        </view>
+      </checkbox-group>
+      </view> 
+    </view>
+
+
+
+
+
+    <!--ENGLISH-->
+    <view wx:if="{{sampleType !='fruitsvegs'}}">
+    <view wx:if="{{lang=='EN'}}" class = "greybg">
+      <view class="button_wide" ontap = "testHelp">
+        <view  wx:if="{{testHelp == false}}" class ="button_wide_content" style="font-size:larger;">Which tests to choose?</view>
+        <view  wx:if="{{testHelp == true}}" class ="button_wide_content" style="font-size:larger;"> </view>
+        <view  wx:if="{{testHelp == false}}" class = "button_wide_arrow_down_box"></view>
+        <view  wx:if="{{testHelp == true}}" class = "button_wide_arrow_up_box"></view>
+      </view>
+
+      <view wx:if="{{testHelp ==true}}">
+        <view class = "information_container" style="height:240rpx" >
+          <view class = "multipicker" style="height:200rpx"> 
+            <picker-view class = "indicator" style="height:180rpx" bindchange="createTabBar" >
+              <picker-view-column>
+                <view wx:for="{{listProducts}}"  wx:key="*this" style="line-height: 50px">{{item}}</view>
+              </picker-view-column>
+            </picker-view>
+          </view>
+        </view>
+
+        <view class="chart_head">
+          <view class="bar_head" style="grid-row-start:101">
+            <text>🥈</text>  
+           </view>
+           <view class="bar_head" style="grid-row-start:101">
+            <text>🏆</text>  
+           </view>
+           <view class="bar_head" style="grid-row-start:101">
+            <text>🥉</text>  
+           </view>
+        </view>
+  
+        <!--Antibiotics-->
+        <view class="chart">
+          <view class="bar" style="grid-row-start:65">
+              <text style="font-size:smaller;">{{barPlot.r2}}</text>
+          </view>
+          <view class="bar" style="grid-row-start:50">
+              <text style="font-size:smaller;">{{barPlot.r1}}</text>
+          </view>
+          <view class="bar" style="grid-row-start:80">
+              <text style="font-size:smaller;">{{barPlot.r3}}</text>
+          </view>
+        </view>
+        <view class= "title">Top 3 antibiotics in {{thisProduct}}</view>
+        <view class="button_wide">{{notYetAvailable}}</view> 
+
+        <!--Lean Meat-->
+        <view wx:if="{{sampleType=='meat'}}">
+          <view class="chart">
+          <view class="bar" style="grid-row-start:65">
+              <text style="font-size:smaller;">Ractopamine</text>
+          </view>
+          <view class="bar" style="grid-row-start:50">
+              <text style="font-size:smaller;">Clenbuterol</text>
+          </view>
+          <view class="bar" style="grid-row-start:80">
+              <text style="font-size:smaller;">Salbutamol</text>
+          </view>
+          </view>
+          <view class= "title">Most common lean meat powder</view>
+        </view>
+    </view>
+    </view>
+  </view>
+  
+    <!--CHINESE-->
+    <view wx:if="{{sampleType !='fruitsvegs'}}" >
+    <view wx:if="{{lang=='CN'}}" class = "greybg">
+      <view class="button_wide" ontap = "testHelp">
+        <view  wx:if="{{testHelp == false}}" class ="button_wide_content" style="font-size:larger;">如何选择你的检测？</view>
+        <view  wx:if="{{testHelp == true}}" class ="button_wide_content" style="font-size:larger;"> </view>
+        <view  wx:if="{{testHelp == false}}" class = "button_wide_arrow_down_box"></view>
+        <view  wx:if="{{testHelp == true}}" class = "button_wide_arrow_up_box"></view>
+      </view>
+
+      <view wx:if="{{testHelp == true}}">
+        <view class = "information_container" style="height:240rpx" >
+          <view class = "multipicker" style="height:200rpx"> 
+            <picker-view class = "indicator" style="height:180rpx" bindchange="createTabBar" >
+              <picker-view-column>
+                <view wx:for="{{listProducts}}"  wx:key="*this" style="line-height: 50px">{{item}}</view>
+              </picker-view-column>
+            </picker-view>
+          </view>
+        </view>
+
+        <view class="chart_head">
+          <view class="bar_head" style="grid-row-start:101">
+            <text>🥈</text>  
+           </view>
+           <view class="bar_head" style="grid-row-start:101">
+            <text>🏆</text>  
+           </view>
+           <view class="bar_head" style="grid-row-start:101">
+            <text>🥉</text>  
+           </view>
+        </view>
+  
+        <!--Antibiotics-->
+        <view class="chart">
+          <view class="bar" style="grid-row-start:65">
+              <text style="font-size:smaller;">{{barPlot.r2}}</text>
+          </view>
+          <view class="bar" style="grid-row-start:50">
+              <text style="font-size:smaller;">{{barPlot.r1}}</text>
+          </view>
+          <view class="bar" style="grid-row-start:80">
+              <text style="font-size:smaller;">{{barPlot.r3}}</text>
+          </view>
+        </view>
+        <view class= "title">最常见的抗生素({{thisProduct}})</view>
+        <view class="button_wide">{{notYetAvailable_cn}}</view> 
+
+        <!--Lean Meat-->
+        <view wx:if="{{sampleType=='meat'}}">
+          <view class="chart">
+          <view class="bar" style="grid-row-start:65">
+              <text style="font-size:smaller;">莱克多巴胺</text>
+          </view>
+          <view class="bar" style="grid-row-start:50">
+              <text style="font-size:smaller;">盐酸克伦特罗</text>
+          </view>
+          <view class="bar" style="grid-row-start:80">
+              <text style="font-size:smaller;">沙丁胺醇</text>
+          </view>
+          </view>
+          <view class= "title">最常见的瘦肉精</view>
+        </view>
+    </view>
+    </view>
+  </view>
+
+    <!--ENGLISH-->
+    <view wx:if="{{lang=='EN'}}" class = "greybg">
+      <view class = "greybg"> 
+        <view class = "button_others_container">
+          <view class = "button_row">
+            <view class = "button_others_flat" bindtap="goBack">home</view>
+            <view class = "button_others_flat" bindtap="toBasket">to basket</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    
+
+      <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}" class = "greybg"> 
+      
+      <view class = "button_others_container">
+        <view class = "button_row">
+          <view class = "button_others_flat" bindtap="goBack">主页</view>
+          <view class = "button_others_flat" bindtap="toBasket">前往购物车</view>
+          </view>
+        </view>
+      </view>
+
+      
+
+    
+    <!--ENGLISH-->
+    <view wx:if="{{lang=='EN'}}"> 
+      <view class = "whitebg">
+        <view class ="procedureVideo">
+          <video autoplay="{{true}}" loop="{{true}}" muted="{{true}}" controls="{{false}}" object-fit="fill" src = "cloud://anthill-test-a8ula.616e-anthill-test-a8ula-1302839884/appImages/procedure_en.mp4" style="height:900rpx; border-radius:15rpx;" ></video>
+        </view>
+      </view>
+    </view>
+
+
+    <!--CHINESE-->
+    <view wx:if="{{lang=='CN'}}"> 
+      <view class = "whitebg">
+        <view class ="procedureVideo">
+          <video autoplay="{{true}}" loop="{{true}}" muted="{{true}}" controls="{{false}}" object-fit="fill" src = "cloud://anthill-test-a8ula.616e-anthill-test-a8ula-1302839884/appImages/procedure.mp4" style="height:900rpx; border-radius:15rpx;" ></video>
+        </view>
+      </view>
+    </view>
+
+
+
+  </view>
+</body>
+
+ 

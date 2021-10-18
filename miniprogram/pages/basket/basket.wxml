@@ -1,0 +1,184 @@
+<body>
+  <view class ="subbody">
+    <form bindsubmit="checkOut">
+      <view class = "greybg">
+        <!--ENGLISH-->
+        <view wx:if="{{lang=='EN'}}">
+          <view wx:if="{{sum > 0}}" class = "checkOut-table">
+            <view class = "checkOut-header-product">Product name</view>
+            <view class = "checkOut-header">Quantity</view>
+            <view class = "checkOut-header">Price (RMB)</view> 
+            <view class = "checkOut-header"></view>
+          </view> 
+        </view>
+
+        <!--CHINESE-->
+        <view wx:if="{{lang=='CN'}}">
+          <view wx:if="{{sum > 0}}" class = "checkOut-table">
+            <view class = "checkOut-header-product">产品名称</view>
+            <view class = "checkOut-header">数量</view>
+            <view class = "checkOut-header">价格 (元)</view> 
+            <view class = "checkOut-header"></view>
+          </view> 
+        </view>        
+
+
+
+        <view wx:for="{{items}}" wx:key="productName" > 
+          <view wx:if="{{item.quantity > 0 && item.checked}}" class = "checkOut-table">
+              <!--ENGLISH-->
+              <view wx:if="{{lang=='EN'}}" class = "checkOut-product">{{item.description}}</view>
+              <!--CHINESE-->
+              <view wx:if="{{lang=='CN'}}" class = "checkOut-product">{{item.description_cn}}</view>
+              
+              <view class = "checkOut-row">{{item.quantity}}</view>
+              <view class = "checkOut-row">{{item.price}}</view>
+              <view wx:if="{{!item.bundleItem || item.bundleItem == false}}" class = "checkOut-row" bindtap="removeThis" id="{{item._id}}">
+                <!--ENGLISH-->
+                <view wx:if="{{lang=='EN'}}" class="remove_button">remove</view>
+                <!--CHINESE-->
+                <view wx:if="{{lang=='CN'}}" class="remove_button">删除</view>
+              </view>
+
+              <view wx:if="{{item.bundleItem && item.bundleItem == true}}" class = "checkOut-row">
+                  <view> </view>
+                </view>
+          </view>
+        </view>
+
+         <!--ENGLISH-->
+         <view wx:if="{{lang=='EN' && total>0}}">
+          <view wx:if="{{shippingFee == 0}}" class = "checkOut-summary">
+            <view class = "checkOut-cell">Shipping: {{shippingFee}} RMB 🎁</view>
+          </view>
+          <view wx:if="{{shippingFee > 0}}" class = "checkOut-summary">
+            <view class = "checkOut-cell">Shipping: {{shippingFee}} RMB</view>
+          </view>
+          <view wx:if="{{discount > 0}}" class = "checkOut-summary">
+            <view class = "checkOut-cell">Discount: {{discount}} RMB 🎁</view> 
+          </view>
+          <view class = "checkOut-final">
+            <view class = "checkOut-cell">Total amount: {{total}} RMB</view>
+          </view>
+          <view class = "customButtonContainer">
+            <view class = "customButton" bindtap = "clearAll">Clear all</view>
+          </view>
+        </view>
+
+        <!--CHINESE-->
+        <view wx:if="{{lang=='CN'  && total>0}}">
+          <view wx:if="{{shippingFee == 0}}" class = "checkOut-summary">
+            <view class = "checkOut-cell">运费: {{shippingFee}} RMB 🎁</view>
+          </view>
+          <view wx:if="{{shippingFee > 0}}" class = "checkOut-summary">
+            <view class = "checkOut-cell">运费: {{shippingFee}} RMB</view>
+          </view>
+          <view wx:if="{{discount > 0}}" class = "checkOut-summary">
+            <view class = "checkOut-cell">已减: {{discount}} RMB 🎁</view> 
+          </view>
+          <view class = "checkOut-final">
+            <view class = "checkOut-cell">合计: {{total}} RMB</view>
+          </view>
+          <view class = "customButtonContainer">
+            <view class = "customButton" bindtap = "clearAll">全部删除</view>
+          </view>
+        </view>
+      </view> 
+ 
+
+
+      <view class = "whitebg">
+        <view wx:if="{{address_filled}}"  class = "inputBox">
+          <view class = "addressview">
+            <!--ENGLISH-->
+            <view wx:if="{{lang=='EN'}}">
+              <view class = "textview">
+                <text class = "one">Name</text>
+                <text class = "three">{{address.userName}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">Address</text>
+                <text class = "three">{{address.detailInfo}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">Postal code</text>
+                <text class = "three">{{address.postalCode}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">Province</text>
+                <text class = "three">{{address.provinceName}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">City</text>
+                <text class = "three">{{address.cityName}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">District</text>
+                <text class = "three">{{address.countyName}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">Phone</text>
+                <text class = "three">{{address.telNumber}}</text>
+              </view>
+            </view>
+
+
+              <!--CHINESE-->
+              <view wx:if="{{lang=='CN'}}">
+                <view class = "textview">
+                  <text class = "one">收货人</text>
+                  <text class = "three">{{address.userName}}</text>
+                </view>
+                <view class = "textview">
+                  <text class = "one">详细地址</text>
+                  <text class = "three">{{address.detailInfo}}</text>
+                </view>
+                <view class = "textview">
+                  <text class = "one">邮编</text>
+                  <text class = "three">{{address.postalCode}}</text>
+                </view>
+                <view class = "textview">
+                  <text class = "one">省份</text>
+                  <text class = "three">{{address.provinceName}}</text>
+                </view>
+                <view class = "textview">
+                  <text class = "one">城市</text>
+                  <text class = "three">{{address.cityName}}</text>
+                </view>
+                <view class = "textview">
+                  <text class = "one">区域</text>
+                  <text class = "three">{{address.countyName}}</text>
+                </view>
+                <view class = "textview">
+                  <text class = "one">手机号码</text>
+                  <text class = "three">{{address.telNumber}}</text>
+                </view>
+            </view>
+
+          </view>
+        </view>
+        <!--ENGLISH-->
+        <view wx:if="{{lang=='EN'}}" class = "customButtonContainer">
+          <button wx:if="{{total > 0}}" class = "customButton"  form-type="submit">Check out</button>
+        </view>
+        <!--CHINESE-->
+        <view wx:if="{{lang=='CN'}}" class = "customButtonContainer">
+          <button wx:if="{{total > 0}}" class = "customButton"  form-type="submit">去结算</button>
+        </view>
+      </view>
+    </form>
+
+    <view class = "greybg">
+       <!--ENGLISH-->
+       <view wx:if="{{lang=='EN'}}" class = "customButtonContainer">
+        <view class = "customButton" bindtap = "getAddress">Change Address</view>
+        <view wx:if="{{total == 0}}"class = "customButton" bindtap = "toOrder">view products</view>
+      </view>
+       <!--CHINESE-->
+       <view wx:if="{{lang=='CN'}}" class = "customButtonContainer">
+        <view class = "customButton" bindtap = "getAddress">更改地址</view>
+        <view wx:if="{{total == 0}}"class = "customButton" bindtap = "toOrder">再逛逛</view>
+      </view>      
+    </view>
+  </view>
+</body>

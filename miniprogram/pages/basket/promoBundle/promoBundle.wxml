@@ -1,0 +1,180 @@
+<body>
+  <view class ="subbody">
+    <view class ="whitebg">
+     <!--ENGLISH-->
+    <view wx:if="{{lang=='EN'}}" style="height:700rpx;">
+      <image src="{{promo.promoImage}}" class="image_promo"/>
+    </view>
+     <!--CHINESE--> 
+    <view wx:if="{{lang=='CN'}}" style="height:700rpx;">
+      <image src="{{promo.promoImage_cn}}" class="image_promo"/>
+    </view>
+  </view>
+
+<view class = "greybg">
+    <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}" class="productList">
+        <view class = "checkbox_container_head">
+          <view class = "checkbox_box_head"></view>
+          <view class = "checkbox_box_description_head">Description</view>
+          <view class = "checkbox_box">Price</view>
+          <view class = "checkbox_box_head" style = "flex:2">Quantity</view>
+          <view class = "checkbox_box_head">RMB</view>
+        </view>
+      </view>
+      <!--CHINESE--> 
+      <view wx:if="{{lang=='CN'}}" class="productList">
+        <view class = "checkbox_container_head">
+          <view class = "checkbox_box_head"></view>
+          <view class = "checkbox_box_description_head">产品</view>
+          <view class = "checkbox_box">价格</view>
+          <view class = "checkbox_box_head" style = "flex:2">数量</view>
+          <view class = "checkbox_box_head">元</view>
+        </view> 
+      </view>
+
+      <view class="productList">
+        <checkbox-group>
+        <view wx:for="{{items}}" wx:key="productName" wx:if="{{item.hidden == false && item.hidden_search == false && item.checked == true && item.bundleItem == true}}" > 
+          <view class = "checkbox_container">
+            <view class = "checkbox_box">
+              <label class="checkbox" > 
+                <checkbox value  = "{{item._id}}" checked = "{{item.checked}}" disabled = "true"></checkbox>
+              </label> 
+            </view> 
+            <view class = "checkbox_box_description" ontap="toTestDescriptionDetail" id = "{{item._id}}">
+              <!--ENGLISH-->
+              <view wx:if="{{lang=='EN'}}" > {{item.description}}</view>
+              <!--CHINESE-->
+              <view wx:if="{{lang=='CN'}}" > {{item.description_cn}}</view>
+              <view class ="arrowbox">
+                <view wx:if="{{expanded!=item._id}}"class = "downArrow" ></view>  
+              </view>  
+            </view> 
+            <view class = "checkbox_box">
+              <view> {{item.productCost}} </view>
+            </view>
+              <picker style="flex:2" id = "{{item.productName}}"  bindchange="bindPickerChange" mode="selector" value="{{item.quantity}} " range="{{array}}" >
+                <view class = "checkbox_box_picker">{{item.quantity}}
+                </view>
+              </picker> 
+            <view class = "checkbox_box">
+              <view> {{item.showprice}}</view>
+            </view>
+          </view>
+          <view wx:if="{{expanded==item._id}}">
+            <view class="popup_bg"></view>
+            <!--ENGLISH-->
+            <view wx:if="{{lang=='EN'}}" class = "popup">
+              <view wx:for="{{item.what}}" wx:key="*this" > 
+                <view class="date-slider">
+                  <view class = "textcell_short">  
+                    <view class="list_icon"></view>
+                  </view>
+                  <view class = "textcell_long">  
+                    <text>{{item}}</text>
+                  </view>
+                </view> 
+              </view>
+              <view class="date-slider">
+                <view class = "textcell_short">  
+                  <view class="list_icon"></view>
+                </view>
+                <view class = "textcell_long">  
+                  <text>This assay is completed in {{item.testDuration}} with {{item.steps}} manual steps</text>
+                </view>
+              </view>
+              <view class = "customButtonContainer">
+                <view class = "customButton" ontap="closePopup"> Close</view>
+                <view class = "customButton" id="{{item._id}}" ontap="toTestDescription"> Read more</view>
+              </view> 
+            </view>
+
+             <!--CHINESE-->
+             <view wx:if="{{lang=='CN'}}" class = "popup">
+              <view wx:for="{{item.what_cn}}" wx:key="*this" > 
+                <view class="date-slider">
+                  <view class = "textcell_short">  
+                    <view class="list_icon"></view>
+                  </view>
+                  <view class = "textcell_long">  
+                    <text>{{item}}</text>
+                  </view>
+                </view> 
+              </view>
+              <view class="date-slider">
+                <view class = "textcell_short">  
+                  <view class="list_icon"></view>
+                </view>
+                <view class = "textcell_long">  
+                  <text>本检测在 {{item.steps}} 个步骤内完成，耗时大约 {{item.testDuration_cn}}</text>
+                </view>
+              </view>
+              <view class = "customButtonContainer">
+                <view class = "customButton" ontap="closePopup">关闭</view>
+                <view class = "customButton" id="{{item._id}}" ontap="toTestDescription">了解更多</view>
+              </view>
+            </view>
+
+          </view>
+          <view style="width:100%"></view>
+        </view>
+      </checkbox-group>
+      </view> 
+    </view>
+
+     <!--ENGLISH-->
+     <view wx:if="{{lang=='EN'}}">
+      <view class = "greybg">
+        <view class = "checkOut-table">
+          <view class = "checkOut-product">Original price</view>
+          <view class = "checkOut-row"> </view>
+          <view class = "checkOut-row">{{originalPrice}}</view>
+        </view>
+        <view class = "checkOut-table">
+          <view class = "checkOut-product">Discount Price</view>
+          <view class = "checkOut-row"> </view>
+          <view class = "checkOut-row">{{discountPrice}}</view>
+        </view>
+      </view>
+
+
+      <view class = "greybg"> 
+        <view class = "button_others_container">
+          <view class = "button_row">
+            <view class = "button_others_flat" bindtap="goBack">home</view>
+            <view class = "button_others_flat" bindtap="toBasket">to basket</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    
+
+      <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}">
+        <view class = "greybg">
+        <view class = "checkOut-table">
+          <view class = "checkOut-product">原价</view>
+          <view class = "checkOut-row"> </view>
+          <view class = "checkOut-row">{{originalPrice}}</view>
+        </view>
+        <view class = "checkOut-table">
+          <view class = "checkOut-product">优惠价</view>
+          <view class = "checkOut-row"> </view>
+          <view class = "checkOut-row">{{discountPrice}}</view>
+        </view>
+      </view>
+
+        <view class = "greybg"> 
+          <view class = "button_others_container">
+            <view class = "button_row">
+              <view class = "button_others_flat" bindtap="goBack">主页</view>
+              <view class = "button_others_flat" bindtap="toBasket">前往购物车</view>
+              </view>
+            </view>
+          </view>
+        </view>
+    
+</view>
+</body>

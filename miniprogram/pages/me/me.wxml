@@ -1,0 +1,356 @@
+<body>
+ <!--ENGLISH-->
+  <view wx:if="{{languagePreference=='EN'}}"  class ="subbody">
+
+    <view class = "whitebg">
+      <view class="button_wide" ontap = "exposeSettings">
+        <view  wx:if="{{exposeSettings == false}}" class ="button_wide_content_me">My Settings</view>
+        <view  wx:if="{{exposeSettings == true}}" class ="button_wide_content_me"></view>
+        <view  wx:if="{{exposeSettings == false}}" class = "button_wide_arrow_down_box"></view>
+        <view  wx:if="{{exposeSettings == true}}" class = "button_wide_arrow_up_box"></view>
+      </view>
+
+    <view wx:if="{{exposeSettings}}">
+      <text class="title_expansion"  >My Address</text>
+      <view wx:if="{{address_filled}}" class = "inputBox">
+        <view class = "addressview">
+          <view class = "textview">
+            <text class = "one">Name</text>
+            <text class = "three">{{address.userName}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">Address</text>
+            <text class = "three">{{address.detailInfo}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">Postal code</text>
+            <text class = "three">{{address.postalCode}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">Province</text>
+            <text class = "three">{{address.provinceName}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">City</text>
+            <text class = "three">{{address.cityName}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">District</text>
+            <text class = "three">{{address.countyName}}</text>
+          </view>
+          <view class = "textview">
+            <Text class = "one">Phone</Text>
+            <text class = "three">{{address.telNumber}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class = "customButtonContainer">
+        <view class = "customButton" bindtap = "getAddress">Address</view>
+        <view class = "customButton" bindtap = "deleteAddress">Remove Address</view>
+      </view>
+
+        <text class="title_expansion" style="text-align:left">My Language</text>
+        <view class = "information_container" style="height:240rpx" >
+          <view class = "multipicker" style="height:200rpx"> 
+            <picker-view class = "indicator" style="height:180rpx" bindchange="chooseLanguage" value="{{langIndex}}" range="{{languages}}">
+              <picker-view-column>
+                <view wx:for="{{languages}}" wx:key="*this" style="line-height: 50px">{{item}}</view>
+              </picker-view-column>
+            </picker-view>
+          </view>
+        </view>
+  
+        <text class="title_expansion">My Privacy</text>
+        <view class = "customButtonContainer">
+          <view class = "customButton" ontap="settingReview">Authorizations</view>
+        </view>
+      </view>
+    </view>
+
+  
+    <view class = "whitebg">
+      <view class="button_wide" ontap = "exposeOrders">
+        <view class ="button_wide_content_me">My placed orders</view>
+        <view  wx:if="{{exposeOrders == false}}" class = "button_wide_arrow_down_box"></view>
+        <view  wx:if="{{exposeOrders == true}}" class = "button_wide_arrow_up_box"></view>
+      </view>
+
+      <view wx:if="{{exposeOrders}}">
+        <view class = "button_row">
+          <view class = "button_others_flat" bindtap="availableOnly">{{availability}}</view>
+          <view class="searchBox">
+            <input type="text" placeholder="Search box" bindinput="searchItems"/>
+          </view>
+        </view>
+
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> You have {{tests_remaining}} tests available</text>
+        </view>
+      </view>
+      
+   
+      <view class = "placedOrders" wx:for="{{organized}}" wx:for-item="i" wx:key="payment_id">
+        <view wx:for="{{i}}" wx:key="*this" wx:for-item="item">
+          <view wx:if="{{item.hidden_search == false}}" class = "orderDetailBox"> 
+            <view class = "itemViewBoxContainer">
+              <view class = "itemViewBox">
+                <view wx:if="{{item.category != item.subcategory}}">{{item.subcategory}} ({{item.category}})</view>
+                <view wx:if="{{item.category == item.subcategory}}">{{item.subcategory}}</view>
+              </view>
+              <view class = "descriptionBoxes">
+                <view class = "descriptionBox">
+                  <view class="remainDone">Remaining tests</view>
+                  <view class="remainDone">Tests done</view>
+                </view>
+                <view class = "descriptionBox">
+                  <view class="remainDone" style="font-size:80rpx;">{{item.tests_remaining}}</view>
+                  <view wx:if="{{item.tests_done ==0}}" class="remainDone" style="font-size:80rpx;">{{item.tests_done}}</view>
+                  <view wx:if="{{item.tests_done > 0}}" class="remainDone" style="font-size:80rpx;color:deepskyblue;" id = "{{item.paymentFirstEight}}" ontap = "toSampleSheet">{{item.tests_done}} </view>
+                </view>
+              </view>
+            </view>
+
+          
+    
+              <view wx:if="{{expanded==item._id}}">
+                <view class = "orderDetailExtra">
+                  <view class = "orderDetailItem" ontap="toClipboard" id ="{{i[0].payment_id}}">Date: {{i[0].orderDate}}
+                    <image class = "copyIcon" src = "/images/copyIcon.png" ></image>  
+                  </view> 
+                </view>
+                <view wx:if="{{item.paid}}" class = "orderDetailExtra">
+                  <view  class = "orderDetailItem" >Purchase ID </view>
+                  <view ontap="toClipboard"  class = "orderDetail" id = "{{item.paymentFirstEight}}" >{{item.paymentFirstEight}}
+                    <image class = "copyIcon" src = "/images/copyIcon.png" ></image>  
+                  </view>
+                </view>
+                <view wx:if="{{item.hidden_search == false && item.shipped == true}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem">Shipping ID</view>
+                  <view class = "orderDetail">{{item.shipping_id}}</view>
+                </view>
+                <view wx:if="{{item.hidden_search == false && item.shipped == true}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem">Shipped on</view>
+                  <view class = "orderDetail">{{item.shipdate}}</view>
+                </view>
+                <view wx:if="{{item.hidden_search == false && item.shipped == false && item.shipping_id!='freegift'}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem">Shipping status</view>
+                  <view class = "orderDetail">Not shipped yet</view>
+                </view>
+                <view wx:if="{{item.hidden_search == false}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem">Storage</view>
+                  <view class = "orderDetail">{{item.storage}} ℃</view>
+                </view>
+                <view  class="button_wide" ontap = "closeExpansion">
+                  <view class ="button_wide_content"></view>
+                  <view class = "button_wide_arrow_up_box"></view>
+                </view>
+              </view>
+            </view>
+  
+          <view wx:if="{{expanded!=item._id}}" class="button_wide" id="{{item._id}}" ontap = "expandList" style="z-index:2; position:relative;bottom:60rpx;">
+            <view class ="button_wide_content">
+              <view class = "arrowbox">
+                <view wx:if="{{item.hidden_search == false}}"  class = "downArrow" ></view>  
+              </view>
+            </view>   
+          </view>
+        </view>
+      </view>
+    </view>
+    </view>
+
+
+  <view class = "whitebg">
+      <text class="title">Connect to SquaredAnt</text>
+
+    <view class = "customButtonContainer">
+      <button class = "customButton" open-type="contact" bindcontact="handleContact">Contact us</button>
+    </view>
+  </view>
+
+ 
+  </view>
+
+   <!--CHINESE-->
+   <view wx:if="{{languagePreference=='CN'}}"  class ="subbody">
+
+    <view class = "whitebg">
+      <view class="button_wide" ontap = "exposeSettings">
+        <view  wx:if="{{exposeSettings == false}}" class ="button_wide_content_me">我的设置</view>
+        <view  wx:if="{{exposeSettings == true}}" class ="button_wide_content_me"></view>
+        <view  wx:if="{{exposeSettings == false}}" class = "button_wide_arrow_down_box"></view>
+        <view  wx:if="{{exposeSettings == true}}" class = "button_wide_arrow_up_box"></view>
+      </view>
+
+    <view wx:if="{{exposeSettings}}">
+      <text class="title_expansion"  >我的地址</text>
+      <view wx:if="{{address_filled}}" class = "inputBox">
+        <view class = "addressview">
+          <view class = "textview">
+            <text class = "one">收货人</text>
+            <text class = "three">{{address.userName}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">详细地址</text>
+            <text class = "three">{{address.detailInfo}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">邮编</text>
+            <text class = "three">{{address.postalCode}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">省份</text>
+            <text class = "three">{{address.provinceName}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">城市</text>
+            <text class = "three">{{address.cityName}}</text>
+          </view>
+          <view class = "textview">
+            <text class = "one">区域</text>
+            <text class = "three">{{address.countyName}}</text>
+          </view>
+          <view class = "textview">
+            <Text class = "one">手机号码</Text>
+            <text class = "three">{{address.telNumber}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class = "customButtonContainer">
+        <view class = "customButton" bindtap = "getAddress">设为常用地址</view>
+        <view class = "customButton" bindtap = "deleteAddress">删除该地址</view>
+      </view>
+
+        <text class="title_expansion" style="text-align:left">我的语言</text>
+        <view class = "information_container" style="height:240rpx" >
+          <view class = "multipicker" style="height:200rpx"> 
+            <picker-view class = "indicator" style="height:180rpx" bindchange="chooseLanguage" value="{{langIndex}}" range="{{languages}}">
+              <picker-view-column>
+                <view wx:for="{{languages}}" wx:key="*this" style="line-height: 50px">{{item}}</view>
+              </picker-view-column>
+            </picker-view>
+          </view>
+        </view>
+  
+        <text class="title_expansion">隐私设置</text>
+        <view class = "customButtonContainer">
+          <view class = "customButton" ontap="settingReview">授权</view>
+        </view>
+      </view>
+    </view>
+
+    
+
+
+    <view class = "whitebg">
+      <view class="button_wide" ontap = "exposeOrders">
+        <view class ="button_wide_content_me">我的订单</view>
+        <view  wx:if="{{exposeOrders == false}}" class = "button_wide_arrow_down_box"></view>
+        <view  wx:if="{{exposeOrders == true}}" class = "button_wide_arrow_up_box"></view>
+      </view>
+
+      <view wx:if="{{exposeOrders}}">
+        <view class = "button_row">
+          <view class = "button_others_flat" bindtap="availableOnly">{{availability}}</view>
+          <view class="searchBox">
+            <input type="text" placeholder="找啊找啊" bindinput="searchItems"/>
+          </view>
+        </view>
+
+      <view class="date-slider">
+        <view class = "textcell_short">  
+          <view class="list_icon"></view>
+        </view>
+        <view class = "textcell_long">  
+          <text> 你还有 {{tests_remaining}} 个检测待使用</text>
+        </view>
+      </view>
+      
+  
+      <view class = "placedOrders" wx:for="{{organized}}" wx:for-item="i" wx:key="payment_id">
+        <view wx:for="{{i}}" wx:key="*this" wx:for-item="item">
+          <view wx:if="{{item.hidden_search == false}}" class = "orderDetailBox"> 
+            <view class = "itemViewBoxContainer">
+              <view class = "itemViewBox">
+                <view wx:if="{{item.category_cn != item.subcategory_cn}}">{{item.subcategory_cn}} ({{item.category_cn}})</view>
+                <view wx:if="{{item.category_cn == item.subcategory_cn}}">{{item.subcategory_cn}}</view>
+              </view>
+              <view class = "descriptionBoxes">
+                <view class = "descriptionBox">
+                  <view class="remainDone"> 待使用</view>
+                  <view class="remainDone">已使用</view>
+                </view>
+                <view class = "descriptionBox">
+                  <view class="remainDone" style="font-size:80rpx;">{{item.tests_remaining}}</view>
+                  <view wx:if="{{item.tests_done ==0}}" class="remainDone" style="font-size:80rpx;">{{item.tests_done}}</view>
+                  <view wx:if="{{item.tests_done > 0}}" class="remainDone" style="font-size:80rpx;color:deepskyblue;" id = "{{item.paymentFirstEight}}" ontap = "toSampleSheet">{{item.tests_done}} </view>
+                </view>
+              </view>
+            </view>
+
+          
+    
+              <view wx:if="{{expanded==item._id}}">
+                <view class = "orderDetailExtra">
+                  <view class = "orderDetailItem" ontap="toClipboard" id ="{{i[0].payment_id}}">购买日期: {{i[0].orderDate}}
+                    <image class = "copyIcon" src = "/images/copyIcon.png" ></image>  
+                  </view> 
+                </view>
+                <view wx:if="{{item.paid}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem" >订单号 </view>
+                  <view ontap="toClipboard"  class = "orderDetail" id = "{{item.paymentFirstEight}}" >{{item.paymentFirstEight}}
+                    <image class = "copyIcon" src = "/images/copyIcon.png" ></image>  
+                  </view>
+                </view>
+                <view wx:if="{{item.hidden_search == false && item.shipped == true}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem">快递号</view>
+                  <view class = "orderDetail">{{item.shipping_id}}</view>
+                </view>
+                <view wx:if="{{item.hidden_search == false && item.shipped == true}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem">发货日期</view>
+                  <view class = "orderDetail">{{item.shipdate}}</view>
+                </view>
+                <view wx:if="{{item.hidden_search == false && item.shipped == false  && item.shipping_id!='freegift'}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem">快递状态</view>
+                  <view class = "orderDetail">未发货</view>
+                </view>
+                <view wx:if="{{item.hidden_search == false}}" class = "orderDetailExtra">
+                  <view class = "orderDetailItem">保存条件</view>
+                  <view class = "orderDetail">{{item.storage_cn}} ℃</view>
+                </view>
+                <view  class="button_wide" ontap = "closeExpansion">
+                  <view class ="button_wide_content"></view>
+                  <view class = "button_wide_arrow_up_box"></view>
+                </view>
+              </view>
+            </view>
+  
+          <view wx:if="{{expanded!=item._id}}" class="button_wide" id="{{item._id}}" ontap = "expandList" style="z-index:2; position:relative;bottom:60rpx;">
+            <view class ="button_wide_content">
+              <view class = "arrowbox">
+                <view wx:if="{{item.hidden_search == false}}"  class = "downArrow" ></view>  
+              </view>
+            </view>   
+          </view>
+        </view>
+      </view>
+    </view>
+    </view>
+
+
+  <view class = "whitebg">
+      <text class="title">联系希蚁</text>
+
+    <view class = "customButtonContainer">
+      <button class = "customButton" open-type="contact" bindcontact="handleContact">联系我们</button>
+    </view>
+  </view>
+  </view>
+</body>
+

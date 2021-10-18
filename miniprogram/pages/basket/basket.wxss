@@ -1,0 +1,21 @@
+/* pages/checkout/checkout.wxss */
+
+
+
+.checkOut-summary{
+  margin: 10rpx;
+  height: 50rpx;
+  text-align: right;
+}
+
+
+.checkOut-final{
+  margin: 10rpx;
+  height: 50rpx;
+  font-weight: bolder;
+  text-align: right;
+}
+
+
+
+

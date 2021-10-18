@@ -1,0 +1,45 @@
+/* test/test.wxss */
+.canvas {
+  width:750rpx;
+  height:300rpx;
+  background-color:pink;
+}
+
+.canvas_protocol {
+  width:750rpx;
+  height:300rpx;
+  background-color:aliceblue;
+}
+
+ 
+.result_row{
+  display:flex;
+  font-size: 30rpx;
+  color:white;
+  width:50%;
+  margin-left:25%;
+}
+
+.result_blocks{
+  flex:1;
+  display:flex;
+  padding:5rpx;
+  display:flex;
+  border-radius: 3rpx;
+  justify-content: center;
+  text-align: center;
+  margin:5rpx;
+  border-radius: 15rpx;
+}
+
+.examplePicture{
+  margin: 5rpx 20% 5rpx 20%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.examplePictureText{
+  margin: 0rpx 20% 15rpx 20%;
+  font-size: smaller;
+}

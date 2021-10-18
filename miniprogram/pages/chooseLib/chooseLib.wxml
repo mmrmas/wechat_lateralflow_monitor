@@ -1,0 +1,16 @@
+<!--pages/chooseLib/chooseLib.wxml-->
+<view class="container">
+
+  <view class="list">
+    <view class="list-item">
+      <text class="black">Initialization failed. Our apologies!</text>
+    </view>
+    <view class="list-item">
+      <text class="request-text">Perhaps your internet connection is not working well</text>
+    </view>
+    <view class="list-item">
+      <text class="request-text">Or, please upgrade your library 2.2.3 or above to use cloud capabilities - basically just upgrade your WeChat app</text>
+    </view>
+  </view>
+</view>
+
