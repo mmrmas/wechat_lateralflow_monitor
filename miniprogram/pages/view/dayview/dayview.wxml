@@ -1,0 +1,22 @@
+<body>
+  <view class ="subbody">
+    <view wx:for="{{dayview}}" wx:key="*this">
+      <canvas class="certificate_canvas" style="border-radius: 15rpx;" canvas-id="{{item.canvasId}}"></canvas>
+      <view class = "customButtonContainer draw">
+       <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}" class = "customButton"  id="{{item.canvasId}}" bindtap = "screenShot">Download</view>
+        <!--CHINESE-->
+        <view wx:if="{{lang=='CN'}}" class = "customButton"  id="{{item.canvasId}}" bindtap = "screenShot">下载</view>
+
+      </view>
+    </view>
+
+    <view class = "customButtonContainer">
+      <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}" class = "customButton" bindtap = "goBack">go back</view>
+      <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}" class = "customButton" bindtap = "goBack">返回</view>
+
+    </view>
+  </view>
+</body> 

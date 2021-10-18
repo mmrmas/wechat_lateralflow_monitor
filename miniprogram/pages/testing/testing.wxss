@@ -1,0 +1,76 @@
+/* pages/3_1_test/test.wxss */
+
+
+.scanQR{
+  width: 90%;
+  margin: 5%;
+  height:350rpx;
+}
+
+.progressLineContainer{
+  display:flex;
+  font-size: 25rpx;
+  margin: 15rpx;
+  align-items: center;
+  text-align: center;
+}
+
+.progressLine{
+  flex: 1;
+  color: grey;
+}
+
+.progressArrow{
+  width: 25rpx;
+  height:25rpx;
+  border-top: grey 2rpx solid;
+  border-right: grey 2rpx solid;
+  transform: rotate(45deg);
+}
+
+.exampleBlock{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.exampleQR{
+  width: 200rpx;
+  height:200rpx;
+  margin:30rpx;
+  animation: shake 1.5s;
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -1px) rotate(-1deg); }
+  20% { transform: translate(-1px, 0px) rotate(1deg); }
+  30% { transform: translate(1px, 1px) rotate(0deg); }
+  40% { transform: translate(1px, -0px) rotate(1deg); }
+  50% { transform: translate(-1px, 1px) rotate(-1deg); }
+  60% { transform: translate(-1px, 1px) rotate(0deg); }
+  70% { transform: translate(1px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 1px) rotate(0deg); }
+  92% { transform: translate(0px, 0px) rotate(1deg); }
+  94% { transform: translate(0px, 0px) rotate(-1deg); }
+  96% { transform: translate(0px, 0px) rotate(1deg); }
+  98% { transform: translate(0px, 0px) rotate(-1deg); }
+  100% { transform: translate(0px, -0px) rotate(1deg); }
+}
+  
+
+
+.exampleQRtext{
+  display:flex;
+  font-size: smaller;
+  margin:30rpx;
+  width: 250rpx;
+  height:200rpx;
+  border: 2rpx solid grey;
+  border-radius: 15rpx;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

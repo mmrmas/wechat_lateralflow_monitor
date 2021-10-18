@@ -1,0 +1,74 @@
+.testCard{
+  margin:50rpx 50rpx 50rpx 50rpx;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 15rpx;
+  position:relative;
+}
+
+.box {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index:10;
+  overflow: hidden;
+  background-color: #92c06d7c;
+  border-radius: 15rpx;
+}
+
+.testCardBg{
+  position: relative;
+  opacity: .4;
+  width: 1200rpx;
+  height: 900rpx;
+  margin-left: -100rpx;
+  margin-top: -300rpx;
+  border-radius: 43%;
+  overflow: hidden;
+} 
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
+
+.testCardBg.-one {
+  position: absolute;
+  animation: rotate 11000ms infinite linear;
+  opacity: .3;
+  background: #EBEBE8;
+  overflow: hidden;
+}
+
+.testCardBg.-two {
+  position: absolute;
+  animation: rotate 10000ms infinite linear;
+  opacity: .1;
+  background: black;
+}
+
+.testCardBg.-three {
+  position: absolute;
+  animation: rotate 14500ms infinite linear;
+  background-color: #92c06d;
+  opacity: .2;
+}
+
+.card-slider{
+  display: flex;
+  text-align: left;
+  align-items: left;
+  justify-content: center;
+  z-index:999;
+  position: relative;
+}
+
+.cardcell_long{
+  flex: 1;
+  justify-content: left;
+  margin: 10rpx 5rpx 5rpx 0;
+}
+
+.cardcell_short{
+  flex: 1;
+  margin: 10rpx 5rpx 5rpx 0;
+}

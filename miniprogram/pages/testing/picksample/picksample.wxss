@@ -1,0 +1,46 @@
+/* pages/3_2_protocol/protocol.wxss */
+
+.sampletype{
+  background-color: white;
+  text-align: center;
+  height: 100rpx;
+  vertical-align: middle;
+}
+
+.choice{
+  height:100rpx;
+  background-color: white;
+  margin:35rpx;
+  border:solid orange 2rpx;
+  border-radius: 5rpx;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.otherinfo_container{ 
+  margin: 15rpx 25rpx 15rpx 25rpx;
+  background-color :aliceblue ;
+  border: solid 2rpx lightgrey;
+  border-radius:5rpx;
+  margin:20rpx;
+}
+
+.otherinfo{
+  display: flex;
+  flex-direction: row;
+}
+
+.narrow{
+  flex-grow:1;
+}
+
+.wide{
+  flex-grow:2;
+}
+
+.description{
+  margin: 10rpx;
+  align-content: center;
+  text-align: center;
+}
+

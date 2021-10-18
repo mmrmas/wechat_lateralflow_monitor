@@ -1,0 +1,244 @@
+<body>
+  <view class ="subbody">
+  
+<view class="greybg">  
+  <view wx:if="{{hasData ==false}}" class= "overtext">
+    <!--ENGLISH-->
+    <view wx:if="{{lang=='EN'}}">
+      <view>Welcome!</view>
+      <view>This is the data view page, please take a look around.</view>
+      <view> It seems you have not added data yet. Pls order your first set and get started</view>
+      <view>Enjoy testing!</view>
+    </view>
+    <!--CHINESE-->
+    <view wx:if="{{lang=='CN'}}">
+      <view>欢迎！</view>
+      <view>这里是数据查看页面，你可以随便看看~</view>
+      <view>不过看起来你还没有添加任何数据哦。请先购买你的第一个检测吧！</view>
+      <view>祝您检测愉快！</view>
+    </view>
+  </view>
+
+    <view class = "buttons_top">
+      <view class = "leftbuttons"> 
+
+        <!--ENGLISH-->
+        <view wx:if="{{lang=='CN'}}"class = "button_all" bindtap="allData" style="{{clickedStyles.all}}"  >所有</view>
+        <!--CHINESE-->
+        <view wx:if="{{lang=='EN'}}" class = "button_all" bindtap="allData" style="{{clickedStyles.all}}"  >All</view>
+
+        <view class = "button_others_container">
+          <view class = "button_row">
+            <view class = "button_others" style="{{clickedStyles.meat}}" bindtap="meatOnly">
+              <image class = "buttonImage" src="{{buttons.meat}}" ></image>
+            </view> 
+            <view class = "button_others" bindtap="aquaOnly" style="{{clickedStyles.aqua}}" >
+              <image class = "buttonImage" src="{{buttons.aqua}}" ></image>
+            </view>
+          </view> 
+          <view class = "button_row">
+            <view class = "button_others" bindtap="dairyOnly" style="{{clickedStyles.dairyeggs}}" >
+              <image class = "buttonImage" src="{{buttons.dairyeggs}}" ></image>
+            </view>
+            <view class = "button_others" bindtap="fVOnly" style="{{clickedStyles.fruitsvegs}}" > 
+              <image class = "buttonImage" src="{{buttons.fruitsvegs}}" ></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}" class = "rightbuttons">
+        <view class = "button_right" bindtap="lastCentury" style="{{timeStyles.all}}">ever</view>
+        <view class = "button_right" bindtap="lastMonth" style="{{timeStyles.lastMonth}}" >last month</view>
+        <view class = "button_right" bindtap="lastWeek"  style="{{timeStyles.lastWeek}}">last week</view>
+      </view>
+
+        <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}" class = "rightbuttons">
+        <view class = "button_right" bindtap="lastCentury" style="{{timeStyles.all}}">全部</view>
+        <view class = "button_right" bindtap="lastMonth" style="{{timeStyles.lastMonth}}" >上月</view>
+        <view class = "button_right" bindtap="lastWeek"  style="{{timeStyles.lastWeek}}">上周</view>
+      </view>
+
+    </view>
+
+
+  <canvas canvas-id="canvas_main" class = "canvas_main" ontap = "getCanvasReport"></canvas>
+</view>
+
+
+
+  <view class="whitebg">
+
+      <map
+      id="myMap"
+      style="width: 100%; height: 450rpx;"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      markers="{{markers}}"
+      show-location
+      scale="{{mapscale}}"
+      bindregionchange = "getReg"
+      bindmarkertap = "markerToSampleSheet"
+      >
+      </map>
+
+      <view class = "sideButtonContainer">
+      <view class = "sideButton" bindtap = "focusMap">
+        <view class="dot"></view>
+      </view>
+    </view>
+    <!--ENGLISH-->
+    <switch wx:if="{{lang=='EN'}}" bindchange="switchPositives" style="margin:15rpx;">positives only</switch>
+    <switch wx:if="{{lang=='EN'}}" bindchange="switchMap" style="margin:15rpx;">Only include map region</switch>
+
+     <!--CHINESE-->
+     <switch wx:if="{{lang=='CN'}}" bindchange="switchPositives" style="margin:15rpx;">只查看检出</switch>
+    <switch wx:if="{{lang=='CN'}}" bindchange="switchMap" style="margin:15rpx;">只查看当前区域</switch>
+  </view>
+
+  <view class="greybg">
+  
+    <view class = "arrowRow"> 
+      <view class = "arrowBox" bindtap="prevmonth" style = "margin-right: 2rpx;" >
+        <view class="arrowPast"></view>
+      </view>
+        
+      <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}" class="arrowBox" bindtap="thismonth">today</view>      
+      <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}" class="arrowBox" bindtap="thismonth">今日</view>
+
+      <view class = "arrowBox" style = "margin-left: 2rpx;" bindtap="nextmonth">
+        <view class="arrowFuture" ></view>
+      </view>
+    </view>
+
+    <view>
+    <!--ENGLISH-->
+     <text  wx:if="{{lang=='EN'}}" class = "calendarTitle"> {{calendarMonth}} {{calendarYear}} </text>
+    <!--CHINESE-->
+     <text  wx:if="{{lang=='CN'}}" class = "calendarTitle">{{calendarYear}} 年 {{calendarMonth}} 月 </text>
+
+      <view class = "table" bindtouchstart="startmove" bindtouchend="endmove">
+        <!--ENGLISH-->
+        <view  wx:if="{{lang=='EN'}}" class="tr">
+          <view class = "th">Sun</view>
+          <view class = "th">Mon</view>
+          <view class = "th">Tue</view>
+          <view class = "th">Wed</view>
+          <view class = "th">Thu</view>
+          <view class = "th">Fri</view>
+          <view class = "th">Sat</view>
+        </view> 
+         <!--CHINESE-->
+        <view  wx:if="{{lang=='CN'}}" class="tr">
+          <view class = "th">日</view>
+          <view class = "th">一</view>
+          <view class = "th">二</view>
+          <view class = "th">三 </view>
+          <view class = "th">四</view>
+          <view class = "th">五</view>
+          <view class = "th">六</view>
+        </view> 
+        <view class = "tr" wx:if="{{d1+6 > 0}}">
+          <view class = "th" style="{{link[1][0]}}" bindtap="{{link[1][1]}}" id="{{link[1][2]}}" wx:if="{{d1 > 0}}" >{{d1}}</view>
+          <view class = "th" wx:if="{{d1 <= 0}}" > </view>
+          <view class = "th" style="{{link[2][0]}}" bindtap="{{link[2][1]}}" id="{{link[2][2]}}" wx:if="{{d1+1 > 0}}" >{{d1+1}}</view>
+          <view class = "th" wx:if="{{d1+1 <= 0}}" > </view>
+          <view class = "th" style="{{link[3][0]}}" bindtap="{{link[3][1]}}" id="{{link[3][2]}}" wx:if="{{d1+2 > 0}}" >{{d1+2}}</view>
+          <view class = "th" wx:if="{{d1+2 <= 0}}" > </view>
+          <view class = "th" style="{{link[4][0]}}" bindtap="{{link[4][1]}}" id="{{link[4][2]}}" wx:if="{{d1+3 > 0}}" >{{d1+3}}</view>
+          <view class = "th" wx:if="{{d1+3 <= 0}}" > </view>
+          <view class = "th" style="{{link[5][0]}}" bindtap="{{link[5][1]}}" id="{{link[5][2]}}" wx:if="{{d1+4 > 0}}" >{{d1+4}}</view>
+          <view class = "th" wx:if="{{d1+4 <= 0}}" > </view>
+          <view class = "th" style="{{link[6][0]}}" bindtap="{{link[6][1]}}" id="{{link[6][2]}}" wx:if="{{d1+5 > 0}}" >{{d1+5}}</view>
+          <view class = "th" wx:if="{{d1+5 <= 0}}" > </view>
+          <view class = "th" style="{{link[7][0]}}" bindtap="{{link[7][1]}}" id="{{link[7][2]}}" wx:if="{{d1+6 > 0}}" >{{d1+6}}</view>
+          <view class = "th" wx:if="{{d1+6 <= 0}}" > </view>
+        </view>
+        <view class = "tr">
+          <view class = "th"style="{{link[8][0]}}" bindtap="{{link[8][1]}}" id="{{link[8][2]}}" >{{d1+7}}</view>
+          <view class = "th" style="{{link[9][0]}}" bindtap="{{link[9][1]}}" id="{{link[9][2]}}">{{d1+8}}</view>
+          <view class = "th" style="{{link[10][0]}}" bindtap="{{link[10][1]}}" id="{{link[10][2]}}">{{d1+9}}</view>
+          <view class = "th" style="{{link[11][0]}}" bindtap="{{link[11][1]}}" id="{{link[11][2]}}">{{d1+10}}</view>
+          <view class = "th" style="{{link[12][0]}}" bindtap="{{link[12][1]}}" id="{{link[12][2]}}">{{d1+11}}</view>
+          <view class = "th" style="{{link[13][0]}}" bindtap="{{link[13][1]}}" id="{{link[13][2]}}">{{d1+12}}</view>
+          <view class = "th" style="{{link[14][0]}}" bindtap="{{link[14][1]}}" id="{{link[14][2]}}">{{d1+13}}</view>
+        </view>
+        <view class = "tr" >
+          <view class = "th" style="{{link[15][0]}}" bindtap="{{link[15][1]}}" id="{{link[15][2]}}">{{d1+14}}</view>
+          <view class = "th" style="{{link[16][0]}}" bindtap="{{link[16][1]}}" id="{{link[16][2]}}">{{d1+15}}</view>
+          <view class = "th" style="{{link[17][0]}}" bindtap="{{link[17][1]}}" id="{{link[17][2]}}">{{d1+16}}</view>
+          <view class = "th" style="{{link[18][0]}}" bindtap="{{link[18][1]}}" id="{{link[18][2]}}">{{d1+17}}</view>
+          <view class = "th" style="{{link[19][0]}}" bindtap="{{link[19][1]}}" id="{{link[19][2]}}">{{d1+18}}</view>
+          <view class = "th" style="{{link[20][0]}}" bindtap="{{link[20][1]}}" id="{{link[20][2]}}">{{d1+19}}</view>
+          <view class = "th" style="{{link[21][0]}}" bindtap="{{link[21][1]}}" id="{{link[21][2]}}">{{d1+20}}</view>
+        </view>
+        <view class = "tr" >
+          <view class = "th" style="{{link[22][0]}}" bindtap="{{link[22][1]}}" id="{{link[22][2]}}">{{d1+21}}</view>
+          <view class = "th" style="{{link[23][0]}}" bindtap="{{link[23][1]}}" id="{{link[23][2]}}">{{d1+22}}</view>
+          <view class = "th" style="{{link[24][0]}}" bindtap="{{link[24][1]}}" id="{{link[24][2]}}">{{d1+23}}</view>
+          <view class = "th" style="{{link[25][0]}}" bindtap="{{link[25][1]}}" id="{{link[25][2]}}">{{d1+24}}</view>
+          <view class = "th" style="{{link[26][0]}}" bindtap="{{link[26][1]}}" id="{{link[26][2]}}">{{d1+25}}</view>
+          <view class = "th" style="{{link[27][0]}}" bindtap="{{link[27][1]}}" id="{{link[27][2]}}">{{d1+26}}</view>
+          <view class = "th" style="{{link[28][0]}}" bindtap="{{link[28][1]}}" id="{{link[28][2]}}">{{d1+27}}</view>
+        </view>
+        <view class = "tr" >
+          <view class = "th" style="{{link[29][0]}}" bindtap="{{link[29][1]}}" id="{{link[29][2]}}">{{d1+28}}</view>
+          <view class = "th" style="{{link[30][0]}}" bindtap="{{link[30][1]}}" id="{{link[30][2]}}">{{d1+29}}</view>
+          <view class = "th" style="{{link[31][0]}}" bindtap="{{link[31][1]}}" id="{{link[31][2]}}" wx:if="{{maxdate >= d1+30}}" >{{d1+30}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+30}}" > </view>
+          <view class = "th"  style="{{link[32][0]}}" bindtap="{{link[32][1]}}" id="{{link[32][2]}}" wx:if="{{maxdate >= d1+31}}" >{{d1+31}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+31}}" > </view>
+          <view class = "th" style="{{link[33][0]}}" bindtap="{{link[33][1]}}" id="{{link[33][2]}}" wx:if="{{maxdate >= d1+32}}" >{{d1+32}}</view>
+          <view class = "th"  wx:if="{{maxdate < d1+32}}" > </view>
+          <view class = "th"  style="{{link[34][0]}}" bindtap="{{link[34][1]}}" id="{{link[34][2]}}" wx:if="{{maxdate >= d1+33}}" >{{d1+33}}</view>
+          <view class = "th"  wx:if="{{maxdate < d1+33}}" > </view>
+          <view class = "th"  style="{{link[35][0]}}" bindtap="{{link[35][1]}}" id="{{link[35][2]}}" wx:if="{{maxdate >= d1+34}}" >{{d1+34}}</view>
+          <view class = "th"  wx:if="{{maxdate < d1+34}}" > </view>
+        </view>
+        <view class = "tr" wx:if="{{maxdate > d1+35}}" >
+          <view class = "th"  style="{{link[36][0]}}" bindtap="{{link[36][1]}}" id="{{link[36][2]}}" wx:if="{{maxdate >= d1+35}}" >{{d1+35}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+35}}" > </view>
+          <view class = "th" style="{{link[37][0]}}" bindtap="{{link[37][1]}}" id="{{link[37][2]}}" wx:if="{{maxdate >= d1+36}}" >{{d1+36}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+36}}" > </view>
+          <view class = "th"  style="{{link[38][0]}}" bindtap="{{link[38][1]}}" id="{{link[38][2]}}" wx:if="{{maxdate >= d1+37}}" >{{d1+37}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+37}}" > </view>
+          <view class = "th"  style="{{link[39][0]}}" bindtap="{{link[39][1]}}" id="{{link[39][2]}}" wx:if="{{maxdate >= d1+38}}" >{{d1+38}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+38}}" > </view>
+          <view class = "th"  style="{{link[40][0]}}" bindtap="{{link[40][1]}}" id="{{link[40][2]}}" wx:if="{{maxdate >= d1+39}}" >{{d1+39}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+39}}" > </view>
+          <view class = "th"  style="{{link[41][0]}}" bindtap="{{link[41][1]}}" id="{{link[41][2]}}" wx:if="{{maxdate >= d1+40}}" >{{d1+40}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+40}}" > </view>
+          <view class = "th"  style="{{link[42][0]}}" bindtap="{{link[42][1]}}" id="{{link[42][2]}}"wx:if="{{maxdate >= d1+41}}" >{{d1+41}}</view>
+          <view class = "th" wx:if="{{maxdate < d1+41}}" > </view>
+        </view>
+      </view>
+    </view>
+
+    <!--ENGLISH-->
+    <view wx:if="{{lang=='EN'}}" class = "Legend">
+      <view class = "positiveLegend"></view>
+      <view>1 or more positives</view>
+    </view>
+    <view wx:if="{{lang=='EN'}}" class = "Legend">
+      <view class = "negativeLegend"></view>
+      <view>No positives</view>
+    </view>
+
+        
+    <!--CHINESE-->
+    <view wx:if="{{lang=='CN'}}" class = "Legend">
+      <view class = "positiveLegend"></view>
+      <view>当日有检出</view>
+    </view>
+    <view wx:if="{{lang=='CN'}}" class = "Legend">
+      <view class = "negativeLegend"></view>
+      <view>当日无检出</view>
+    </view>
+
+  </view>
+  </view>
+  </body>

@@ -1,0 +1,132 @@
+.certificate_canvas{
+  height:1080rpx;
+  width:100%;
+  background-color: #92c06d;
+  margin-top:50rpx;
+  margin-bottom: 50rpx;
+}
+
+.certificate{
+  margin-bottom:15rpx;
+  font-size:30rpx;
+  height: 1150rpx;
+  width:100%;
+  background-color:#92c06d;
+}
+
+.certificateHeader{
+  display:flex;
+  height:120rpx;
+  font-style: oblique;
+  font-size: 40rpx;
+}
+
+.certificateFooter{
+  display:flex;
+  height:150rpx;
+  font-size: 30rpx;
+}
+
+.certificateTitle{
+  flex:5;
+  display:flex;
+  font-style: oblique;
+  font-size: 40rpx;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.certificateLogo{
+  z-index: 10;
+  flex:1;
+  height:120rpx;
+  width:120rpx;
+  border-radius: 50%;
+  border: solid 1rpx orange;
+}
+
+.certificate_row_1{
+  display:flex;
+  height:120rpx;
+  background-color: white;
+
+}
+ 
+.certificate_row_2{
+  display:flex;
+  height:280rpx;
+  background-color: white;
+}
+
+.certificate_row_cell{
+  flex:1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border:1rpx solid deepskyblue;
+  background-color: white;
+  
+}
+
+.certificate_block{
+  display:flex;
+  height:500rpx;
+  background-color: white;
+}
+
+.certificate_block_cell{
+  flex:1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border:1rpx solid deepskyblue;
+}
+
+.certificate_block_split_top{
+  height: 120rpx;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 1rpx solid deepskyblue;
+
+}
+
+.certificate_block_split_bot{
+  height: 360rpx;
+  font-size:200rpx;
+}
+
+.box_title{
+  font-family: monospace;
+  display:flex;
+  font-size: 25rpx;
+  text-align: left;
+  justify-content: top;
+}
+
+.result_image{
+  width: 280rpx; 
+  height: 400rpx;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 1rpx solid deepskyblue;
+  margin: auto;
+}
+
+.footer_text{
+  flex:4;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer_image{
+  flex:1;
+  width: 135rpx;
+  height: 135rpx;
+}
+

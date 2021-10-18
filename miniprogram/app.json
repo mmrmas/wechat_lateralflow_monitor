@@ -1,0 +1,71 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/view/view",
+    "pages/chooseLib/chooseLib",
+    "pages/testing/testing",
+    "pages/testing/assay/assay",
+    "pages/testing/picksample/picksample",
+    "pages/basket/basket",
+    "pages/basket/orderTest/orderTest",
+    "pages/basket/promoBundle/promoBundle",
+    "pages/basket/orderTest/testDescription/testDescription",
+    "pages/view/dayview/dayview",
+    "pages/me/me"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "Your location information"
+    }
+  },
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "蚁巢AntHill",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "backgroundColor": "white",
+    "borderStyle": "black",
+    "selectedColor": "00BFFF",
+    "color": "#131313",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "home",
+        "iconPath": "./images/home_unchecked.png",
+        "selectedIconPath": "./images/home_checked.png"
+      },
+      {
+        "pagePath": "pages/basket/basket",
+        "text": "basket",
+        "iconPath": "./images/basket_unchecked.png",
+        "selectedIconPath": "./images/basket_checked.png"
+      },
+      {
+        "pagePath": "pages/testing/testing",
+        "text": "test",
+        "iconPath": "./images/test_unchecked.png",
+        "selectedIconPath": "./images/test_checked.png"
+      },
+      {
+        "pagePath": "pages/view/view",
+        "text": "view",
+        "iconPath": "./images/view_unchecked.png",
+        "selectedIconPath": "./images/view_checked.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "me",
+        "iconPath": "./images/me_unchecked.png",
+        "selectedIconPath": "./images/me_checked.png"
+      }
+    ]
+  },
+  "functionalPages": {
+    "independent": true
+  },
+  "sitemapLocation": "sitemap.json"
+}

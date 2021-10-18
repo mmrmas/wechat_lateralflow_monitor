@@ -1,0 +1,334 @@
+/* pages/view/view.wxss *//**index.wxss**/
+
+
+.button_toPurchase{
+  display:flex; 
+  flex:2;
+  border-style: outset;
+  background-color:#92c06d;
+  border-radius: 15rpx;
+  margin: 5rpx 5rpx 0 5rpx;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.button_toPurchase:active{
+  background-color:#365815;
+  border-style: inset;
+  margin: 5rpx;
+}
+
+.me_all_buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 80rpx;
+  text-align: center;
+  align-items: center;
+}
+
+.me_all_button{
+  font-size: 15px;
+  width: 375rpx;
+  color:black;
+  align-items: center;
+  vertical-align: middle;
+  background:white;
+  border-radius: 0rpx;
+  border-right:2rpx solid rgb(151, 151, 151);
+}
+
+.me_all_button:active {
+  color: #365815;
+  box-shadow: 0px 3px 3px grey;
+  }
+
+.map-container{
+  width:750rpx;
+  height:500rpx;
+  border-radius: 10rpx;
+}
+ 
+.mapview{
+  width:740rpx;
+  height:490rpx;
+  padding:5rpx;
+} 
+
+.canvas_main {
+  width:740rpx;
+  height:400rpx;
+  background-color:'transparent';
+}
+
+.canvas {
+  width:740rpx;
+  height:500rpx;
+  background-color:'transparent';
+  border:solid lightgrey;
+  border-width: 2rpx;
+}
+
+.extend {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  text-align: center;
+}
+
+.extend_button{
+  width: 20px;
+  color:black;
+  border-radius: 10px;
+  align-items: center;
+  background:wheat;
+  border-radius: 10px;
+ }
+
+ .extend_text{
+  width: 120px;
+  background:white;
+  border-radius: 3px;
+ }
+
+.arrowRow{
+  display:flex;
+  height: 100rpx;
+  margin-bottom:5rpx;
+}
+
+ .arrowBox{
+   flex:1;
+   display:flex;
+   align-items: center;
+   justify-content: center;
+   width:50rpx;
+   text-align: center;
+   border-radius: 3rpx;
+   border: 1px solid #999;
+   color: #999;
+ }
+ 
+ .arrowBox:active{
+  background-color:#365815;
+  border-style: inset;
+}
+
+ .arrowPast{
+  left: 40rpx;
+  height: 40rpx;
+  border-top: 5rpx solid #999;
+  border-right: 5rpx solid #999;
+  width:40rpx;
+  position: absolute;
+  transform: rotate(225deg);
+}
+
+ .arrowFuture {
+   right:40rpx;
+  height: 40rpx;
+  border-top: 5rpx solid #999;
+  border-right: 5rpx solid #999;
+  width:40rpx;
+  position: absolute;
+  transform: rotate(45deg);
+}
+
+.extension{
+  background:wheat;
+  border-radius: 3px;
+  width:90%;
+  margin-left: 10%;
+  text-align:center;
+ }
+
+
+.inner-extension{
+  width:95%;
+  background-color:white;
+  font-size: 12px;
+  margin-left: 5%;
+}
+
+.inner-extension-table{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.inner-extension-button{
+  background-color: silver;
+  width: 20px;
+  border: grey;
+  border-radius: 3px;
+}
+
+.extend_overview {
+  width:200rpx;
+  height: 60rpx;
+  text-align: center; 
+  vertical-align: middle;
+  background-color: lightgrey;
+  border-bottom: lightgrey;
+  border-right:grey;
+  border-top:grey;
+  border-radius: 10rpx;
+}
+
+.extension_canvas{
+  background:white;
+  width:100%;
+  text-align:center;
+ }
+
+.canvas_hidden{
+  display: none;
+}
+
+.productContainer{
+  display: flex;
+  flex-flow: row;
+}
+
+.a1{
+  display: flex;
+  flex-flow: row;
+}
+
+.productPageButtonsContainer{
+  display:flex;
+  flex-wrap: wrap;
+  width:100%;
+  justify-content: space-around;
+}
+ 
+.productPageButtons{
+  display:flex;
+  flex: 1 0; 
+  height:350rpx;
+  width:350rpx;
+  margin: 5rpx;
+  border-style: outset;
+  background-color:#92c06d;
+  border-radius: 15rpx;
+  align-items: center;
+  justify-content: center;  
+  position: relative;  
+}
+
+.productPageButtons:active{
+  background-color:#365815;
+  border-style: inset;
+}
+
+
+.buttonImage{
+  height: 80%;
+  width: 80%;
+  margin:5% 10% 15% 10%;
+}
+
+.buttontext{
+  position: absolute;
+  margin-top:40%;
+  font-size: larger;
+}
+
+.table {
+  border: 0px solid darkgray;
+  border-radius: 15rpx;
+  background-color:#92c06d9c;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+    width:40%;
+    justify-content: center;
+    text-align: center;
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  color:white;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
+
+.calendarTitle{
+  display: flex;
+  justify-content: center;
+  font-size: 40rpx;
+  color:white;
+  background-color:#92c06d9c;
+  border-bottom: 5rpx solid white;
+}
+ 
+.calendarButtons{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divLine{
+  background:white;
+  width: 100%;
+  height: 40rpx;
+ }
+
+.today{
+  font-size: 12px;
+  right: 110rpx;
+  margin-top: 0rpx;
+  text-decoration-line: underline;
+ }
+
+ .Legend{
+  margin: 15rpx;
+  display:flex;
+  align-items: center;
+  font-size: small;
+  }
+  
+  .positiveLegend{
+    margin:15rpx;
+    width: 50rpx;
+    height:50rpx;
+    border-radius: 50%;
+    background-color: #8B0000;
+  }
+  
+  .negativeLegend{
+    margin:15rpx;
+    width: 50rpx;
+    height:50rpx;
+    border-radius: 5%;
+    background-color: #EBEBE8;
+  }
+
+  .overtext{
+    z-index: 10;
+    margin: 50rpx;
+    margin-top:50rpx;
+    border-radius: 15rpx;
+    background-color: white;
+    border: 3rpx solid red;
+    color:red;
+    position: absolute;
+    text-align: center;
+  }
+
+
+.buttonImage{
+  height: 80%;
+  width: 80%;
+  margin:5% 5% 5% 5%;
+}
+ 

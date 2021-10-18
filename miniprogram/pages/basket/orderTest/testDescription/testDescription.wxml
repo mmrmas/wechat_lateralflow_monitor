@@ -1,0 +1,223 @@
+<body>
+  <view class ="subbody">
+    <!--ENGLISH PAGE-->
+    <view wx:if="{{lang=='EN'}}">
+    <view class = "greybg"> 
+      <view class = "title">{{kit.subcategory}}</view>
+      <view wx:for="{{kit.what}}" wx:key="*this" > 
+        <view class="date-slider">
+          <view class = "textcell_short">  
+            <view class="list_icon"></view>
+          </view>
+          <view class = "textcell_long">  
+            <text>{{item}}</text>
+          </view>
+        </view> 
+      </view>
+
+      <view class = "whitebg"> 
+        <view class = "title">Why test for {{kit.subcategory}}? </view>
+        <view wx:for="{{kit.why}}" wx:key="*this" > 
+          <view class="date-slider">
+            <view class = "textcell_short">  
+              <view class="list_icon"></view>
+            </view>
+            <view class = "textcell_long">  
+              <text> {{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <div class='box'>
+        <div class='wave -one'></div>
+        <div class='wave -two'></div>
+        <div class='wave -three'></div>
+      </div>
+
+      <view class = "greybg" style="padding-bottom: 50rpx;"> 
+        <view class = "title">{{kit.subcategory}} test description</view>
+        <view class = "testCard">
+        <view class = "box">
+          <view class="card-slider">
+            <view class = "cardcell_short">  
+              <view>Name</view>
+            </view>
+            <view class = "cardcell_long">  
+              <text>{{kit.name}}</text>
+            </view>
+          </view>
+          <view class="card-slider">
+            <view class = "cardcell_short">  
+              <view>Producer</view>
+            </view>
+            <view class = "cardcell_long">  
+              <text>{{kit.brandInfo.name}}</text>
+            </view>
+          </view>
+          <view class = "card-slider">
+            <view class = "cardcell_short">  
+              <view>Category</view>
+            </view>
+            <view class = "cardcell_long">  
+              <view wx:for="{{kit.foodGroupsShow}}" wx:key="*this" > 
+                <text>{{item}}</text> 
+              </view>
+            </view>
+          </view>
+          <view class = "card-slider">
+        <view class = "cardcell_short">  
+          <view>Specification</view>
+        </view>
+        <view class = "cardcell_long">  
+          <text>{{kit.qrcodeValidity}} x {{kit.specification}}</text>
+        </view>
+      </view>
+      <view class = "card-slider">
+        <view class = "cardcell_short">  
+          <view>Storage</view>
+        </view>
+        <view class = "cardcell_long">  
+          <text>{{kit.storage}} ℃</text>
+        </view>
+        </view>
+        <view class = "card-slider">
+          <view class = "cardcell_short">  
+            <view>Test duration</view>
+          </view>
+          <view class = "cardcell_long">  
+            <text>{{kit.testDuration}}</text>
+          </view>
+        </view>
+        <view class='testCardBg -one'></view>
+        <view class='testCardBg -two'></view>
+        <view class='testCardBg -three'></view>
+      </view> 
+      </view>
+    </view>
+    <view class = "whitebg"> 
+      <view class = "button_others_container">
+        <view class = "button_row">
+          <view class = "button_others_flat" bindtap="onUnload">go back</view>
+          <view class = "button_others_flat" bindtap="previewProtocol">preview protocol</view>
+        </view>
+      </view> 
+    </view>
+    </view>
+    </view>
+
+ 
+
+
+
+   <!--CHINESE PAGE-->
+   <view wx:if="{{lang=='CN'}}">
+    <view class = "greybg"> 
+      <view class = "title">{{kit.subcategory_cn}}</view>
+      <view wx:for="{{kit.what_cn}}" wx:key="*this" > 
+        <view class="date-slider"> 
+          <view class = "textcell_short">  
+            <view class="list_icon"></view>
+          </view>
+          <view class = "textcell_long">  
+            <text>{{item}}</text>
+          </view>
+        </view> 
+      </view>
+
+      <view class = "whitebg"> 
+        <view class = "title">为什么检测{{kit.subcategory_cn}}? </view>
+        <view wx:for="{{kit.why_cn}}" wx:key="*this" > 
+          <view class="date-slider">
+            <view class = "textcell_short">  
+              <view class="list_icon"></view>
+            </view>
+            <view class = "textcell_long">  
+              <text> {{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <div class='box'>
+        <div class='wave -one'></div>
+        <div class='wave -two'></div>
+        <div class='wave -three'></div>
+      </div>
+
+      <view class = "greybg" style="padding-bottom: 50rpx;"> 
+        <view class = "title">{{kit.subcategory_cn}}检测描述</view>
+        <view class = "testCard">
+        <view class = "box">
+          <view class="card-slider">
+            <view class = "cardcell_short">  
+              <view>产品名称</view>
+            </view>
+            <view class = "cardcell_long">  
+              <text>{{kit.name_cn}}</text>
+            </view>
+          </view>
+          <view class = "card-slider">
+            <view class = "cardcell_short">  
+              <view>生产商</view>
+            </view>
+            <view class = "cardcell_long">  
+              <text>{{kit.brandInfo.name_cn}}</text>
+            </view>
+          </view>
+          <view class = "card-slider">
+            <view class = "cardcell_short">  
+          <view>食品种类</view>
+        </view>
+        <view class = "cardcell_long">  
+          <view wx:for="{{kit.foodGroupsShow_cn}}" wx:key="*this" > 
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </view>
+      <view class = "card-slider">
+        <view class = "cardcell_short">  
+          <view>产品规格</view>
+        </view>
+        <view class = "cardcell_long">  
+          <text>{{kit.qrcodeValidity}} x {{kit.specification_cn}}</text>
+        </view>
+      </view>
+      <view class = "card-slider">
+        <view class = "cardcell_short">  
+          <view>保存条件</view>
+        </view>
+        <view class = "cardcell_long">  
+          <text>{{kit.storage_cn}} ℃</text>
+        </view>
+        </view>
+        <view class = "card-slider">
+          <view class = "cardcell_short">  
+            <view>检测耗时</view>
+          </view>
+          <view class = "cardcell_long">  
+            <text>{{kit.testDuration_cn}}</text>
+          </view>
+        </view>
+        <view class='testCardBg -one'></view>
+        <view class='testCardBg -two'></view>
+        <view class='testCardBg -three'></view>
+      </view> 
+      </view>
+    </view>
+    <view class = "whitebg"> 
+      <view class = "button_others_container">
+        <view class = "button_row">
+          <view class = "button_others_flat" bindtap="onUnload">返回</view>
+          <view class = "button_others_flat" bindtap="previewProtocol">检测流程预览</view>
+        </view>
+      </view> 
+    </view>
+    </view>
+</view>
+
+
+  </view>
+</body>
+
+

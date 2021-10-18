@@ -1,0 +1,188 @@
+<body>
+  <view class ="subbody">
+   <view class = "greybg">
+     <!--ENGLSIH-->
+    <view wx:if="{{lang=='EN'}}" class = 'title'>Testing for {{subcategory}} {{category}}</view>
+    <view wx:if="{{lang=='EN'}}" class = 'title_expansion'>Choose your food sample</view>
+    <!--CHINESE-->
+    <view wx:if="{{lang=='CN'}}" class = 'title'>你在检测 {{subcategory}} {{category}}</view>
+    <view wx:if="{{lang=='CN'}}" class = 'title_expansion'>选择你的食品种类</view>
+
+    <view class = "information_container">
+        <view class = "multipicker"> 
+          <picker-view class = "indicator" value="{{value}}" bindchange="bindChange">
+            <picker-view-column>
+              <view  wx:for="{{matrices}}"  wx:key="*this"  >{{item}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{submatrices_array}}" wx:key="*this">{{item}}</view>
+            </picker-view-column>
+          </picker-view>
+        </view>
+      </view> 
+    </view>
+
+
+    <view class = "whitebg">
+     <!--ENGLSIH-->
+      <view wx:if="{{lang=='EN'}}" class = 'title_expansion'>Detailed information (optional)</view>
+    <!--CHINESE-->
+      <view wx:if="{{lang=='CN'}}" class = 'title_expansion'>具体信息 (可选)</view>
+
+      <form bindsubmit="OptionalInfoAndSubmit">    
+    
+     <!--ENGLSIH-->
+      <view wx:if="{{lang=='EN'}}">
+        <view class = "inputBox">
+          <view class = "narrow_wide_column">
+            <view class = "narrow_column">Product:</view>
+            <view class = "wide_column">
+              <input name = "foodDetails" type ="text" placeholder = "Pls add food details"/>
+            </view>
+          </view>
+          <view class = "narrow_wide_column">
+            <view class = "narrow_column">Brand:</view> 
+            <view class = "wide_column">
+              <input name = "brand" type ="text" placeholder = "Brand name"/>
+            </view>
+          </view>
+          <view class = "narrow_wide_column">
+            <view class = "narrow_column">Shop name:</view>
+            <view class = "wide_column">
+              <input  name = "seller" type ="text" placeholder = "Market / website / ..."/>
+            </view>
+          </view>
+          <view class = "narrow_wide_column">
+            <view class = "narrow_column">Location:</view> 
+            <view class = "wide_column" style="display:flex;">
+              <view name = "location" bindtap="getLocation" style="flex:4; color:grey;">{{locationAddress}}</view>
+              <view wx:if="{{location_picked}}" class = "remove_button" bindtap="removeLocation"  style="flex:1">remove</view>
+            </view>
+          </view>
+          <view class = "customButtonContainer">
+            <button class = "customButton" form-type="submit" > Submit</button>
+          </view>
+        </view>
+      </view>
+
+
+        <!--CHINESE-->
+        <view wx:if="{{lang=='CN'}}">
+          <view class = "inputBox">
+          <view class = "narrow_wide_column">
+            <view class = "narrow_column">具体食品:</view>
+            <view class = "wide_column">
+              <input name = "foodDetails" type ="text" placeholder = "请添加食品具体信息"/>
+            </view>
+          </view>
+          <view class = "narrow_wide_column">
+            <view class = "narrow_column">品牌:</view> 
+            <view class = "wide_column">
+              <input name = "brand" type ="text" placeholder = "品牌名称"/>
+            </view>
+          </view>
+          <view class = "narrow_wide_column">
+            <view class = "narrow_column">商铺名称:</view>
+            <view class = "wide_column">
+              <input  name = "seller" type ="text" placeholder = "超市 / 网站 / ..."/>
+            </view>
+          </view>
+          <view class = "narrow_wide_column">
+            <view class = "narrow_column">所在地点:</view> 
+            <view class = "wide_column" style="display:flex;">
+              <view name = "brand" bindtap="getLocation" style="flex:4; color:grey;">{{locationAddress}}</view>
+              <view wx:if="{{location_picked}}" class = "remove_button" bindtap="removeLocation"  style="flex:1">删除</view>
+              </view>
+            </view>
+            <view class = "customButtonContainer">
+              <button class = "customButton" form-type="submit" > 提交</button>
+            </view>
+          </view>
+        </view>
+
+      </form>
+    </view>
+
+    <view wx:if="{{submitting}}">
+ 
+  
+      <!--ENGLISH-->
+      <view wx:if="{{lang=='EN'}}">
+        <view class = "popup">
+          <view class="title">Please confirm</view>
+            <view class = "addressview" style ="margin-left:20%">
+              <view class = "textview">
+                <text class = "one">Food type</text>
+                <text class = "three">{{matrix}}，{{submatrix}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">Details</text>
+                <text class = "three">{{optionalInfo.foodDetails}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">Brand</text>
+                <text class = "three">{{optionalInfo.brand}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">Shop name</text>
+                <text class = "three">{{optionalInfo.seller}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">Address</text>
+                <text class = "three">{{address}}</text>
+              </view>
+            </view>
+            <view class = "customButtonContainer">
+              <view class = "customButton" ontap="continueSubmit"> Submit</view>
+              <view class = "customButton" ontap="cancelSubmit"> Cancel</view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{submitting}}" class="popup_bg"></view>
+
+      <!--CHINESE-->
+       <view wx:if="{{lang=='CN'}}">
+        <view class = "popup">
+          <view class="title">请确认以下信息</view>
+            <view class = "addressview" style ="margin-left:20%">
+              <view class = "textview">
+                <text class = "one">食品种类</text>
+                <text class = "three">{{matrix}}，{{submatrix}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">具体食品</text>
+                <text class = "three">{{optionalInfo.foodDetails}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">品牌</text>
+                <text class = "three">{{optionalInfo.brand}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">商铺名称</text>
+                <text class = "three">{{optionalInfo.seller}}</text>
+              </view>
+              <view class = "textview">
+                <text class = "one">地址</text>
+                <text class = "three">{{address}}</text>
+              </view>
+            </view> 
+            <view class = "customButtonContainer">
+              <view class = "customButton" ontap="continueSubmit">提交</view>
+              <view class = "customButton" ontap="cancelSubmit">取消</view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{submitting}}" class="popup_bg"></view>
+
+    
+      </view>
+  </view>
+</body>
+
+
+
+
+
+
+
+

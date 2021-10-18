@@ -1,0 +1,66 @@
+<body>
+  <view class ="subbody">
+     <!--ENGLISH-->
+     <view wx:if="{{lang=='EN'}}" style="height:468rpx;">
+      <image src="cloud://anthill-2hbtj.616e-anthill-2hbtj-1302839884/appImages/Ant_frontpage_Eng.jpg" class = "image_top"/>
+    </view>
+
+    <!--CHINESE-->
+    <view wx:if="{{lang=='CN'}}" style="height:468rpx;">
+      <image src="cloud://anthill-2hbtj.616e-anthill-2hbtj-1302839884/appImages/Ant_frontpage.jpg" class = "image_top"/>
+    </view>
+   
+  <view class = "greybg">
+      <view class = "productPageButtonsContainer">   
+        <view wx:for="{{items}}" wx:key="name"> 
+          <view class="productPageButtons {{item.name}}" >
+            <image class = "buttonImage" src="{{item.imgsrc}}" bindtap="toProductPage" id="{{item.name}}" > </image>
+            <!--ENGLISH-->
+            <text wx:if="{{lang=='EN'}}" class = "buttontext" style="font-size:smaller"> {{item.name_en}}</text>
+              <!--CHINESE-->
+              <text wx:if="{{lang=='CN'}}" class = "buttontext"> {{item.name_cn}}</text>
+          </view>
+        </view> 
+      </view>
+      <view class="button_wide" >
+
+         <!--ENGLISH-->
+        <view wx:if="{{lang=='EN'}}" class ="button_wide_content">Buy your tests</view>
+        <!--CHINSESE-->
+        <view wx:if="{{lang=='CN'}}" class ="button_wide_content">购买测试</view>
+
+      </view>
+  
+      <view class="dividerLine"></view>
+      <view class="button_wide" ontap = "toTest">
+
+        <!--ENGLISH-->
+        <view wx:if="{{lang=='EN'}}" class ="button_wide_content">Test your food</view>
+        <!--CHINESE-->
+        <view wx:if="{{lang=='CN'}}" class ="button_wide_content">检测食品</view>
+
+        <view class = "button_wide_arrow_box"></view>
+      </view>
+
+
+      <view class="dividerLine"></view>
+      <view class="button_wide" ontap = "toView">
+
+       <!--ENGLISH-->
+        <view wx:if="{{lang=='EN'}}" class ="button_wide_content">View your data</view>
+        <!--CHINESE-->
+        <view wx:if="{{lang=='CN'}}" class ="button_wide_content">查看数据</view>
+
+        <view class = "button_wide_arrow_box"></view>
+      </view>
+      <view class="dividerLine"></view>
+    </view>
+    <view class = "whitebg">
+      <view wx:for="{{images}}" wx:key="*this">
+          <view style="height:700rpx;">
+            <image src="{{item.image}}" id="{{item.id}}" ontap="toPromo" class="image_promo"/>
+        </view>
+      </view> 
+      </view>
+  </view>
+</body>
